@@ -1,0 +1,40 @@
+{
+    "name": "TensorFlow",
+    "description": "<p>TensorFlow&trade; is an open source software library for numerical computation using data flow graphs. Nodes in the graph represent mathematical operations, while the graph edges represent the multidimensional data arrays (tensors) communicated between them. The flexible architecture allows you to deploy computation to one or more CPUs or GPUs in a desktop, server, or mobile device with a single API.&nbsp;<\/p>",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/pull_image_10-12-2019-04-47-pm.jpg",
+    "tags": [
+        "have api",
+        "machine learning",
+        "profile"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/tensorflow\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "TensorFlow",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/pull_image_10-12-2019-04-47-pm.jpg",
+            "humanURL": "https:\/\/www.tensorflow.org\/",
+            "baseURL": "",
+            "tags": [],
+            "properties": []
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/tensorflow"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/tensorflo"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/www.tensorflow.org\/"
+        }
+    ]
+}
