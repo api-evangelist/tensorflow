@@ -1,20 +1,18 @@
 name: TensorFlow
-description: An end-to-end open source machine learning platform for everyone. 
-  TensorFlow provides a comprehensive ecosystem of tools, libraries, and 
-  community resources for building and deploying ML-powered applications.
+description: An end-to-end open source machine learning platform for everyone. TensorFlow provides a comprehensive ecosystem of tools, libraries, and community resources for building and deploying ML-powered applications.
 image: https://www.tensorflow.org/images/tf_logo_social.png
 url: https://www.tensorflow.org/
 created: '2024-01-15'
 modified: '2026-03-16'
 specificationVersion: '0.18'
 tags:
-  - Machine Learning
-  - Deep Learning
-  - Neural Networks
   - AI
+  - Deep Learning
+  - JavaScript
+  - Machine Learning
+  - Neural Networks
   - Open Source
   - Python
-  - JavaScript
 apis:
   - name: TensorFlow Core API
     description: >-
@@ -24,9 +22,9 @@ apis:
     humanURL: https://www.tensorflow.org/api_docs/python/tf
     baseURL: https://www.tensorflow.org/api_docs
     tags:
+      - Core API
       - Machine Learning
       - Python
-      - Core API
     properties:
       - type: X-documentation
         url: https://www.tensorflow.org/api_docs/python/tf
@@ -44,8 +42,8 @@ apis:
     humanURL: https://js.tensorflow.org/
     baseURL: https://cdn.jsdelivr.net/npm/@tensorflow/tfjs
     tags:
-      - JavaScript
       - Browser
+      - JavaScript
       - Node.js
     properties:
       - type: X-documentation
@@ -63,9 +61,9 @@ apis:
     humanURL: https://www.tensorflow.org/lite
     baseURL: https://www.tensorflow.org/lite/api_docs
     tags:
-      - Mobile
-      - Embedded
       - Edge Computing
+      - Embedded
+      - Mobile
     properties:
       - type: X-documentation
         url: https://www.tensorflow.org/lite/api_docs
@@ -74,8 +72,7 @@ apis:
       - type: X-examples
         url: https://www.tensorflow.org/lite/examples
       - type: X-github
-        url: 
-          https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite
+        url: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite
   - name: TensorFlow Serving API
     description: >-
       A flexible, high-performance serving system for machine learning models, designed
@@ -84,10 +81,10 @@ apis:
     humanURL: https://www.tensorflow.org/tfx/guide/serving
     baseURL: https://www.tensorflow.org/tfx/serving
     tags:
-      - Model Serving
-      - REST API
       - gRPC
+      - Model Serving
       - Production
+      - REST API
     properties:
       - type: X-documentation
         url: https://www.tensorflow.org/tfx/serving/api_docs/cc/
@@ -104,9 +101,9 @@ apis:
     humanURL: https://tfhub.dev/
     baseURL: https://tfhub.dev/
     tags:
-      - Pre-trained Models
-      - Transfer Learning
       - Model Repository
+      - Pre-Trained Models
+      - Transfer Learning
     properties:
       - type: X-documentation
         url: https://www.tensorflow.org/hub/api_docs/python/hub
