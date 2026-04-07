@@ -1,127 +1,138 @@
 name: TensorFlow
-description: An end-to-end open source machine learning platform for everyone. TensorFlow provides a comprehensive ecosystem of tools, libraries, and community resources for building and deploying ML-powered applications.
+description: An end-to-end open source machine learning platform for everyone. 
+  TensorFlow provides a comprehensive ecosystem of tools, libraries, and 
+  community resources for building and deploying ML-powered applications.
 image: https://www.tensorflow.org/images/tf_logo_social.png
 url: https://www.tensorflow.org/
 created: '2024-01-15'
 modified: '2026-03-16'
 specificationVersion: '0.18'
 tags:
-- Machine Learning
-- Deep Learning
-- Neural Networks
-- AI
-- Open Source
-- Python
-- JavaScript
-apis:
-- name: TensorFlow Core API
-  description: The foundational API for building and training machine learning models using TensorFlow
-  image: https://www.tensorflow.org/images/tf_logo_social.png
-  humanURL: https://www.tensorflow.org/api_docs/python/tf
-  baseURL: https://www.tensorflow.org/api_docs
-  tags:
   - Machine Learning
+  - Deep Learning
+  - Neural Networks
+  - AI
+  - Open Source
   - Python
-  - Core API
-  properties:
-  - type: X-documentation
-    url: https://www.tensorflow.org/api_docs/python/tf
-  - type: X-tutorial
-    url: https://www.tensorflow.org/tutorials
-  - type: X-github
-    url: https://github.com/tensorflow/tensorflow
-  - type: X-guide
-    url: https://www.tensorflow.org/guide
-- name: TensorFlow.js API
-  description: A JavaScript library for training and deploying ML models in the browser and on Node.js
-  image: https://www.tensorflow.org/images/tf_logo_social.png
-  humanURL: https://js.tensorflow.org/
-  baseURL: https://cdn.jsdelivr.net/npm/@tensorflow/tfjs
-  tags:
   - JavaScript
-  - Browser
-  - Node.js
-  properties:
-  - type: X-documentation
-    url: https://js.tensorflow.org/api/latest/
-  - type: X-tutorial
-    url: https://js.tensorflow.org/tutorials/
-  - type: X-github
-    url: https://github.com/tensorflow/tfjs
-  - type: X-npm
-    url: https://www.npmjs.com/package/@tensorflow/tfjs
-- name: TensorFlow Lite API
-  description: Lightweight solution for mobile and embedded devices
-  image: https://www.tensorflow.org/images/tf_logo_social.png
-  humanURL: https://www.tensorflow.org/lite
-  baseURL: https://www.tensorflow.org/lite/api_docs
-  tags:
-  - Mobile
-  - Embedded
-  - Edge Computing
-  properties:
-  - type: X-documentation
-    url: https://www.tensorflow.org/lite/api_docs
-  - type: X-guide
-    url: https://www.tensorflow.org/lite/guide
-  - type: X-examples
-    url: https://www.tensorflow.org/lite/examples
-  - type: X-github
-    url: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite
-- name: TensorFlow Serving API
-  description: A flexible, high-performance serving system for machine learning models, designed for production environments
-  image: https://www.tensorflow.org/images/tf_logo_social.png
-  humanURL: https://www.tensorflow.org/tfx/guide/serving
-  baseURL: https://www.tensorflow.org/tfx/serving
-  tags:
-  - Model Serving
-  - REST API
-  - gRPC
-  - Production
-  properties:
-  - type: X-documentation
-    url: https://www.tensorflow.org/tfx/serving/api_docs/cc/
-  - type: X-rest-api
-    url: https://www.tensorflow.org/tfx/serving/api_rest
-  - type: X-grpc-api
-    url: https://www.tensorflow.org/tfx/serving/api_grpc
-  - type: X-github
-    url: https://github.com/tensorflow/serving
-- name: TensorFlow Hub API
-  description: A library for reusable machine learning modules
-  image: https://www.tensorflow.org/images/tf_logo_social.png
-  humanURL: https://tfhub.dev/
-  baseURL: https://tfhub.dev/
-  tags:
-  - Pre-trained Models
-  - Transfer Learning
-  - Model Repository
-  properties:
-  - type: X-documentation
-    url: https://www.tensorflow.org/hub/api_docs/python/hub
-  - type: X-models
-    url: https://tfhub.dev/
-  - type: X-github
-    url: https://github.com/tensorflow/hub
+apis:
+  - name: TensorFlow Core API
+    description: >-
+      The foundational API for building and training machine learning models using
+      TensorFlow.
+    image: https://www.tensorflow.org/images/tf_logo_social.png
+    humanURL: https://www.tensorflow.org/api_docs/python/tf
+    baseURL: https://www.tensorflow.org/api_docs
+    tags:
+      - Machine Learning
+      - Python
+      - Core API
+    properties:
+      - type: X-documentation
+        url: https://www.tensorflow.org/api_docs/python/tf
+      - type: X-tutorial
+        url: https://www.tensorflow.org/tutorials
+      - type: X-github
+        url: https://github.com/tensorflow/tensorflow
+      - type: X-guide
+        url: https://www.tensorflow.org/guide
+  - name: TensorFlow.js API
+    description: >-
+      A JavaScript library for training and deploying ML models in the browser and
+      on Node.js.
+    image: https://www.tensorflow.org/images/tf_logo_social.png
+    humanURL: https://js.tensorflow.org/
+    baseURL: https://cdn.jsdelivr.net/npm/@tensorflow/tfjs
+    tags:
+      - JavaScript
+      - Browser
+      - Node.js
+    properties:
+      - type: X-documentation
+        url: https://js.tensorflow.org/api/latest/
+      - type: X-tutorial
+        url: https://js.tensorflow.org/tutorials/
+      - type: X-github
+        url: https://github.com/tensorflow/tfjs
+      - type: X-npm
+        url: https://www.npmjs.com/package/@tensorflow/tfjs
+  - name: TensorFlow Lite API
+    description: >-
+      Lightweight solution for mobile and embedded devices.
+    image: https://www.tensorflow.org/images/tf_logo_social.png
+    humanURL: https://www.tensorflow.org/lite
+    baseURL: https://www.tensorflow.org/lite/api_docs
+    tags:
+      - Mobile
+      - Embedded
+      - Edge Computing
+    properties:
+      - type: X-documentation
+        url: https://www.tensorflow.org/lite/api_docs
+      - type: X-guide
+        url: https://www.tensorflow.org/lite/guide
+      - type: X-examples
+        url: https://www.tensorflow.org/lite/examples
+      - type: X-github
+        url: 
+          https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite
+  - name: TensorFlow Serving API
+    description: >-
+      A flexible, high-performance serving system for machine learning models, designed
+      for production environments.
+    image: https://www.tensorflow.org/images/tf_logo_social.png
+    humanURL: https://www.tensorflow.org/tfx/guide/serving
+    baseURL: https://www.tensorflow.org/tfx/serving
+    tags:
+      - Model Serving
+      - REST API
+      - gRPC
+      - Production
+    properties:
+      - type: X-documentation
+        url: https://www.tensorflow.org/tfx/serving/api_docs/cc/
+      - type: X-rest-api
+        url: https://www.tensorflow.org/tfx/serving/api_rest
+      - type: X-grpc-api
+        url: https://www.tensorflow.org/tfx/serving/api_grpc
+      - type: X-github
+        url: https://github.com/tensorflow/serving
+  - name: TensorFlow Hub API
+    description: >-
+      A library for reusable machine learning modules.
+    image: https://www.tensorflow.org/images/tf_logo_social.png
+    humanURL: https://tfhub.dev/
+    baseURL: https://tfhub.dev/
+    tags:
+      - Pre-trained Models
+      - Transfer Learning
+      - Model Repository
+    properties:
+      - type: X-documentation
+        url: https://www.tensorflow.org/hub/api_docs/python/hub
+      - type: X-models
+        url: https://tfhub.dev/
+      - type: X-github
+        url: https://github.com/tensorflow/hub
 maintainers:
-- FN: Google Brain Team
-  email: tensorflow@googlegroups.com
-  url: https://www.tensorflow.org/
+  - FN: Google Brain Team
+    email: tensorflow@googlegroups.com
+    url: https://www.tensorflow.org/
 include:
-- name: TensorFlow Community
-  url: https://www.tensorflow.org/community
+  - name: TensorFlow Community
+    url: https://www.tensorflow.org/community
 common:
-- type: X-blog
-  url: https://blog.tensorflow.org/
-- type: X-github-org
-  url: https://github.com/tensorflow
-- type: X-twitter
-  url: https://twitter.com/tensorflow
-- type: X-youtube
-  url: https://www.youtube.com/tensorflow
-- type: X-license
-  url: https://github.com/tensorflow/tensorflow/blob/master/LICENSE
-- type: X-forum
-  url: https://discuss.tensorflow.org/
-- type: X-stack-overflow
-  url: https://stackoverflow.com/questions/tagged/tensorflow
+  - type: X-blog
+    url: https://blog.tensorflow.org/
+  - type: X-github-org
+    url: https://github.com/tensorflow
+  - type: X-twitter
+    url: https://twitter.com/tensorflow
+  - type: X-youtube
+    url: https://www.youtube.com/tensorflow
+  - type: X-license
+    url: https://github.com/tensorflow/tensorflow/blob/master/LICENSE
+  - type: X-forum
+    url: https://discuss.tensorflow.org/
+  - type: X-stack-overflow
+    url: https://stackoverflow.com/questions/tagged/tensorflow
