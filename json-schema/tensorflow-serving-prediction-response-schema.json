@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/api-evangelist/tensorflow/blob/main/json-schema/tensorflow-serving-prediction-response-schema.json",
+  "title": "TensorFlow Serving Prediction Response",
+  "description": "Schema for a prediction inference response from TensorFlow Serving. Returns predictions in row format or outputs in column format.",
+  "type": "object",
+  "properties": {
+    "predictions": {
+      "description": "Row format predictions. One prediction per input instance. Can be a scalar, list, or object.",
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "Array of predictions, one per input"
+        },
+        { "type": "number" },
+        { "type": "string" }
+      ]
+    },
+    "outputs": {
+      "type": "object",
+      "description": "Column format outputs. Map of output tensor names to arrays of values.",
+      "additionalProperties": {
+        "type": "array"
+      }
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message if the prediction failed"
+    }
+  },
+  "examples": [
+    {
+      "predictions": [1.0, 2.0, 3.0]
+    },
+    {
+      "predictions": [
+        {"output_label": "cat", "score": 0.92},
+        {"output_label": "dog", "score": 0.08}
+      ]
+    },
+    {
+      "outputs": {
+        "output_label": ["cat", "dog"],
+        "score": [0.92, 0.87]
+      }
+    }
+  ]
+}

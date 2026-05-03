@@ -1,0 +1,38 @@
+{
+  "name": "TensorFlow Serving Prediction Request",
+  "description": "Structure documentation for a prediction inference request to TensorFlow Serving REST API.",
+  "fields": [
+    {
+      "name": "signature_name",
+      "type": "string",
+      "required": false,
+      "description": "Optional name of the serving signature to use. Omit to use the default serving signature."
+    },
+    {
+      "name": "instances",
+      "type": "array",
+      "required": false,
+      "description": "Row format input. An array of individual inputs. Use this when all inputs share the same first (0th) tensor dimension.",
+      "items": {
+        "type": "string | number | object",
+        "description": "Single input - scalar, list, or named-tensor object"
+      }
+    },
+    {
+      "name": "inputs",
+      "type": "object",
+      "required": false,
+      "description": "Column format input. A map of input tensor names to arrays. Use this when inputs have different 0th dimensions.",
+      "additionalProperties": {
+        "type": "array",
+        "description": "Array of values for a named input tensor"
+      }
+    }
+  ],
+  "notes": [
+    "Use 'instances' (row format) when all tensor inputs share the same batch dimension",
+    "Use 'inputs' (column format) when tensor inputs have different sizes",
+    "Only one of 'instances' or 'inputs' should be provided per request",
+    "Binary data should be encoded as base64 JSON strings"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "TensorFlow Serving Predict - Row Format",
+  "description": "Example prediction request to the TensorFlow Serving Predict API using row format (instances array)",
+  "request": {
+    "method": "POST",
+    "url": "http://localhost:8501/v1/models/my_model:predict",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "signature_name": "serving_default",
+      "instances": [
+        {
+          "tag": "foo",
+          "signal": [1, 2, 3, 4, 5],
+          "sensor": [[1, 2], [3, 4]]
+        },
+        {
+          "tag": "bar",
+          "signal": [3, 4, 1, 2, 5],
+          "sensor": [[4, 5], [6, 8]]
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "predictions": [
+        {
+          "output_label": "cat",
+          "score": 0.923
+        },
+        {
+          "output_label": "dog",
+          "score": 0.876
+        }
+      ]
+    }
+  }
+}

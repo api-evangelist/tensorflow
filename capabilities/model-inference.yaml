@@ -1,0 +1,215 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "TensorFlow Model Inference"
+  description: >-
+    Workflow capability for running ML model inference using TensorFlow Serving.
+    Combines model management and inference operations to support MLOps workflows
+    including model health monitoring, metadata inspection, and running
+    classification, regression, and prediction tasks in production environments.
+  tags:
+    - TensorFlow
+    - Machine Learning
+    - Model Serving
+    - Inference
+    - MLOps
+    - AI
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TENSORFLOW_SERVING_HOST: TENSORFLOW_SERVING_HOST
+      TENSORFLOW_SERVING_PORT: TENSORFLOW_SERVING_PORT
+
+capability:
+  consumes:
+    - import: tensorflow-serving
+      location: ./shared/tensorflow-serving.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: tensorflow-inference-api
+      description: "Unified REST API for TensorFlow model inference and management."
+      resources:
+        - path: /v1/models/{model_name}
+          name: model-status
+          description: "Model status and health information"
+          operations:
+            - method: GET
+              name: get-model-status
+              description: "Returns the current status of a model in the ModelServer"
+              call: "tensorflow-serving.get-model-status"
+              with:
+                model_name: "rest.model_name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/models/{model_name}/metadata
+          name: model-metadata
+          description: "Model signature and schema metadata"
+          operations:
+            - method: GET
+              name: get-model-metadata
+              description: "Returns metadata and signature definitions for a model"
+              call: "tensorflow-serving.get-model-metadata"
+              with:
+                model_name: "rest.model_name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/models/{model_name}/versions/{version}
+          name: model-version-status
+          description: "Status for a specific model version"
+          operations:
+            - method: GET
+              name: get-model-version-status
+              description: "Returns status for a specific version of the model"
+              call: "tensorflow-serving.get-model-version-status"
+              with:
+                model_name: "rest.model_name"
+                version: "rest.version"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/models/{model_name}/versions/{version}/metadata
+          name: model-version-metadata
+          description: "Metadata for a specific model version"
+          operations:
+            - method: GET
+              name: get-model-version-metadata
+              description: "Returns metadata for a specific version of a model"
+              call: "tensorflow-serving.get-model-version-metadata"
+              with:
+                model_name: "rest.model_name"
+                version: "rest.version"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/models/{model_name}/classify
+          name: classify
+          description: "Classification inference endpoint"
+          operations:
+            - method: POST
+              name: classify-model
+              description: "Run classification inference on the model"
+              call: "tensorflow-serving.classify-model"
+              with:
+                model_name: "rest.model_name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/models/{model_name}/regress
+          name: regress
+          description: "Regression inference endpoint"
+          operations:
+            - method: POST
+              name: regress-model
+              description: "Run regression inference on the model"
+              call: "tensorflow-serving.regress-model"
+              with:
+                model_name: "rest.model_name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/models/{model_name}/predict
+          name: predict
+          description: "Prediction inference endpoint"
+          operations:
+            - method: POST
+              name: predict-model
+              description: "Run prediction inference on the model"
+              call: "tensorflow-serving.predict-model"
+              with:
+                model_name: "rest.model_name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: tensorflow-inference-mcp
+      transport: http
+      description: "MCP server for AI-assisted TensorFlow model inference and management."
+      tools:
+        - name: get-model-status
+          description: "Check the health and availability status of a TensorFlow model"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "tensorflow-serving.get-model-status"
+          with:
+            model_name: "tools.model_name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-model-version-status
+          description: "Check status of a specific version of a TensorFlow model"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "tensorflow-serving.get-model-version-status"
+          with:
+            model_name: "tools.model_name"
+            version: "tools.version"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-model-metadata
+          description: "Retrieve signature definitions and schema metadata for a TensorFlow model"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "tensorflow-serving.get-model-metadata"
+          with:
+            model_name: "tools.model_name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-model-version-metadata
+          description: "Retrieve metadata for a specific version of a TensorFlow model"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "tensorflow-serving.get-model-version-metadata"
+          with:
+            model_name: "tools.model_name"
+            version: "tools.version"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: classify-with-model
+          description: "Run classification inference on a TensorFlow model with input examples"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "tensorflow-serving.classify-model"
+          with:
+            model_name: "tools.model_name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: regress-with-model
+          description: "Run regression inference on a TensorFlow model with input examples"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "tensorflow-serving.regress-model"
+          with:
+            model_name: "tools.model_name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: predict-with-model
+          description: "Run prediction inference on a TensorFlow model using row or column format inputs"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "tensorflow-serving.predict-model"
+          with:
+            model_name: "tools.model_name"
+          outputParameters:
+            - type: object
+              mapping: "$."

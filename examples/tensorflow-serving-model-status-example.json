@@ -1,0 +1,26 @@
+{
+  "title": "TensorFlow Serving Get Model Status",
+  "description": "Example request to retrieve the status of a deployed TensorFlow model",
+  "request": {
+    "method": "GET",
+    "url": "http://localhost:8501/v1/models/my_image_classifier",
+    "headers": {}
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "model_version_status": [
+        {
+          "version": 1,
+          "state": "AVAILABLE",
+          "status": {}
+        },
+        {
+          "version": 2,
+          "state": "AVAILABLE",
+          "status": {}
+        }
+      ]
+    }
+  }
+}

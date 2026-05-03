@@ -1,0 +1,127 @@
+extends: spectral:oas
+rules:
+  # Naming Conventions
+  tensorflow-operation-id-kebab-case:
+    description: Operation IDs should use camelCase following TensorFlow Serving conventions
+    message: "Operation ID '{{value}}' should use camelCase"
+    given: "$.paths[*][get,post,put,patch,delete].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+    severity: warn
+
+  tensorflow-model-name-in-path:
+    description: Model endpoints must include model_name path parameter
+    message: "Model inference paths should include {model_name} path parameter"
+    given: "$.paths['/v1/models/{model_name}*']"
+    then:
+      field: get
+      function: truthy
+    severity: off
+
+  tensorflow-path-versioned:
+    description: All TensorFlow Serving API paths must be versioned with /v1/
+    message: "Path '{{property}}' must start with /v1/"
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/v1/"
+    severity: error
+
+  tensorflow-inference-methods:
+    description: Inference endpoints (classify, regress, predict) must use POST
+    message: "TensorFlow Serving inference endpoints must use POST method"
+    given: "$.paths[*classify,*regress,*predict]"
+    then:
+      field: post
+      function: truthy
+    severity: error
+
+  tensorflow-status-get-method:
+    description: Model status and metadata endpoints must use GET
+    message: "Model status and metadata endpoints must use GET method"
+    given: "$.paths['/v1/models/{model_name}','/v1/models/{model_name}/metadata']"
+    then:
+      field: get
+      function: truthy
+    severity: error
+
+  tensorflow-response-200-defined:
+    description: All operations must define a 200 success response
+    message: "Operation '{{path}}' must define a 200 success response"
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      field: "200"
+      function: truthy
+    severity: error
+
+  tensorflow-error-response-defined:
+    description: Operations should define error responses
+    message: "Operation should define at least one error response (4xx)"
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ['400']
+            - required: ['401']
+            - required: ['404']
+    severity: warn
+
+  tensorflow-request-body-inference:
+    description: Inference operations must define a request body
+    message: "Inference operation '{{path}}' must define a request body"
+    given: "$.paths[*classify,*regress,*predict].post"
+    then:
+      field: requestBody
+      function: truthy
+    severity: error
+
+  tensorflow-json-content-type:
+    description: TensorFlow Serving uses JSON for all request/response bodies
+    message: "TensorFlow Serving endpoints should use application/json content type"
+    given: "$.paths[*][post].requestBody.content"
+    then:
+      field: "application/json"
+      function: truthy
+    severity: warn
+
+  tensorflow-tags-defined:
+    description: All operations should be tagged
+    message: "Operation is missing tags"
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+    severity: warn
+
+  tensorflow-summary-title-case:
+    description: All operation summaries should use Title Case
+    message: "Summary '{{value}}' should use Title Case"
+    given: "$.paths[*][get,post,put,patch,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+    severity: warn
+
+  tensorflow-description-present:
+    description: All operations should have a description
+    message: "Operation is missing a description"
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: description
+      function: truthy
+    severity: warn
+
+  tensorflow-schema-descriptions:
+    description: Schema components should have descriptions
+    message: "Schema '{{path}}' is missing a description"
+    given: "$.components.schemas[*]"
+    then:
+      field: description
+      function: truthy
+    severity: warn

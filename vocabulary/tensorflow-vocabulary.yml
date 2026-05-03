@@ -1,0 +1,171 @@
+name: TensorFlow Vocabulary
+description: >-
+  Core vocabulary and taxonomy for TensorFlow, the open source machine learning
+  platform. Covers ML model lifecycle concepts, inference types, tensor data
+  formats, and operational dimensions.
+created: '2026-05-03'
+modified: '2026-05-03'
+terms:
+  - term: Tensor
+    definition: >-
+      A multi-dimensional array that is the primary data structure in TensorFlow.
+      Tensors represent model inputs, outputs, weights, and intermediate
+      computations.
+    tags:
+      - Core Concepts
+      - Data Types
+
+  - term: Model
+    definition: >-
+      A trained machine learning artifact consisting of a computational graph and
+      weights that maps inputs to outputs. TensorFlow models are typically saved
+      in SavedModel format.
+    tags:
+      - Core Concepts
+      - Model Lifecycle
+
+  - term: SavedModel
+    definition: >-
+      TensorFlow's serialization format for models. A SavedModel contains a
+      complete TensorFlow program including weights, computation graph, and
+      metadata. The standard format for deployment.
+    tags:
+      - Model Lifecycle
+      - Serialization
+
+  - term: Serving Signature
+    definition: >-
+      A named entry point for a TensorFlow model that defines the input and
+      output tensor specifications. A model may have multiple signatures for
+      different inference tasks.
+    tags:
+      - TensorFlow Serving
+      - Model Lifecycle
+
+  - term: Inference
+    definition: >-
+      The process of running a trained model on new input data to produce
+      predictions, classifications, or other outputs. TensorFlow Serving
+      supports three inference modes: predict, classify, and regress.
+    tags:
+      - Inference
+      - Core Concepts
+
+  - term: Prediction
+    definition: >-
+      Generic inference operation that maps input tensors to output tensors.
+      Uses row format (instances array) or column format (inputs object). The
+      most flexible inference type.
+    tags:
+      - Inference
+      - REST API
+
+  - term: Classification
+    definition: >-
+      Inference operation that maps input examples to label-score pairs.
+      Follows the PredictionService.Classify gRPC API semantics. Returns
+      class labels and associated confidence scores.
+    tags:
+      - Inference
+      - REST API
+
+  - term: Regression
+    definition: >-
+      Inference operation that maps input examples to continuous numeric
+      values. Follows the PredictionService.Regress gRPC API semantics.
+    tags:
+      - Inference
+      - REST API
+
+  - term: TensorFlow Serving
+    definition: >-
+      A high-performance serving system for TensorFlow models designed for
+      production environments. Supports REST and gRPC APIs, model versioning,
+      A/B testing, and request batching.
+    tags:
+      - TensorFlow Serving
+      - Production
+
+  - term: ModelServer
+    definition: >-
+      The TensorFlow Serving executable that hosts one or more models and
+      exposes REST and gRPC endpoints for inference. Configured via command
+      line or config file.
+    tags:
+      - TensorFlow Serving
+      - Infrastructure
+
+  - term: Model Version
+    definition: >-
+      A specific numbered iteration of a trained model. TensorFlow Serving
+      manages multiple versions simultaneously and supports canary rollouts
+      and version-specific routing.
+    tags:
+      - Model Lifecycle
+      - Versioning
+
+  - term: Model Label
+    definition: >-
+      A human-readable alias (e.g., "stable", "canary") assigned to a model
+      version. Labels provide stable routing references without requiring
+      version numbers in client code.
+    tags:
+      - Model Lifecycle
+      - Versioning
+
+  - term: Row Format
+    definition: >-
+      Prediction request format using an 'instances' array where each element
+      is one input example. All inputs must share the same 0th tensor dimension.
+    tags:
+      - REST API
+      - Data Formats
+
+  - term: Column Format
+    definition: >-
+      Prediction request format using an 'inputs' object where each key is a
+      named input tensor and values are arrays across all instances. Used when
+      tensor dimensions differ.
+    tags:
+      - REST API
+      - Data Formats
+
+  - term: TFJob
+    definition: >-
+      A Kubernetes Custom Resource Definition (CRD) from the Kubeflow Training
+      Operator that enables distributed TensorFlow training on Kubernetes clusters.
+    tags:
+      - Kubernetes
+      - Training
+
+  - term: TensorFlow Hub
+    definition: >-
+      A repository of pre-trained TensorFlow modules for transfer learning.
+      Models are available for image, text, video, and audio tasks.
+    tags:
+      - Pre-Trained Models
+      - Transfer Learning
+
+  - term: TensorFlow Lite
+    definition: >-
+      A lightweight version of TensorFlow optimized for mobile and embedded
+      devices. Supports on-device inference with quantized models.
+    tags:
+      - Mobile
+      - Edge Computing
+
+  - term: TensorFlow.js
+    definition: >-
+      A JavaScript library for training and deploying TensorFlow models in
+      web browsers and Node.js environments.
+    tags:
+      - JavaScript
+      - Browser
+
+  - term: gRPC
+    definition: >-
+      A high-performance RPC framework used by TensorFlow Serving alongside
+      REST. Provides lower latency for high-throughput inference scenarios.
+    tags:
+      - Protocols
+      - TensorFlow Serving

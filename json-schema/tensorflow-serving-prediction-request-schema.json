@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/api-evangelist/tensorflow/blob/main/json-schema/tensorflow-serving-prediction-request-schema.json",
+  "title": "TensorFlow Serving Prediction Request",
+  "description": "Schema for a prediction inference request to TensorFlow Serving. Supports row format (instances array) and column format (inputs object).",
+  "type": "object",
+  "properties": {
+    "signature_name": {
+      "type": "string",
+      "description": "Optional name of the signature to use. Defaults to the model's default serving signature."
+    },
+    "instances": {
+      "description": "Row format input array. Each element is a single prediction input - can be a scalar, list, or named-input object.",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Array of string inputs"
+        },
+        {
+          "type": "array",
+          "items": { "type": "number" },
+          "description": "Array of numeric inputs"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Named input object with multiple tensor values",
+            "additionalProperties": true
+          },
+          "description": "Array of named-input objects"
+        }
+      ]
+    },
+    "inputs": {
+      "type": "object",
+      "description": "Column format input. Map of input tensor names to arrays of values across all instances.",
+      "additionalProperties": {
+        "oneOf": [
+          { "type": "array" },
+          { "type": "number" },
+          { "type": "string" }
+        ]
+      }
+    }
+  },
+  "examples": [
+    {
+      "instances": ["hello", "world"]
+    },
+    {
+      "signature_name": "serving_default",
+      "instances": [
+        {
+          "tag": "foo",
+          "signal": [1, 2, 3, 4, 5]
+        }
+      ]
+    },
+    {
+      "inputs": {
+        "tag": ["foo", "bar"],
+        "signal": [[1, 2, 3, 4, 5], [3, 4, 1, 2, 5]]
+      }
+    }
+  ]
+}

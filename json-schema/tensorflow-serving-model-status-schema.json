@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/api-evangelist/tensorflow/blob/main/json-schema/tensorflow-serving-model-status-schema.json",
+  "title": "TensorFlow Serving Model Status Response",
+  "description": "Schema for model status response from TensorFlow Serving, including state and error information for each model version.",
+  "type": "object",
+  "properties": {
+    "model_version_status": {
+      "type": "array",
+      "description": "List of status entries for each version of the model",
+      "items": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "integer",
+            "description": "The model version number"
+          },
+          "state": {
+            "type": "string",
+            "description": "Current lifecycle state of the model version",
+            "enum": ["UNKNOWN", "START", "LOADING", "AVAILABLE", "UNLOADING", "END"]
+          },
+          "status": {
+            "type": "object",
+            "description": "Error status if the model is in an error state",
+            "properties": {
+              "error_code": {
+                "type": "string",
+                "description": "Machine-readable error code"
+              },
+              "error_message": {
+                "type": "string",
+                "description": "Human-readable error message"
+              }
+            }
+          }
+        },
+        "required": ["version", "state"]
+      }
+    }
+  },
+  "examples": [
+    {
+      "model_version_status": [
+        {
+          "version": 1,
+          "state": "AVAILABLE",
+          "status": {}
+        }
+      ]
+    }
+  ]
+}

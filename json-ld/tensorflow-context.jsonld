@@ -1,0 +1,85 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "tf": "https://www.tensorflow.org/api_docs/python/tf#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+
+    "TensorFlowModel": {
+      "@id": "tf:Model",
+      "@type": "@id",
+      "rdfs:comment": "A TensorFlow machine learning model"
+    },
+    "ModelVersion": {
+      "@id": "tf:ModelVersion",
+      "@type": "@id"
+    },
+    "ModelSignature": {
+      "@id": "tf:Signature",
+      "@type": "@id"
+    },
+    "PredictionRequest": {
+      "@id": "tf:PredictRequest",
+      "@type": "@id"
+    },
+    "PredictionResponse": {
+      "@id": "tf:PredictResponse",
+      "@type": "@id"
+    },
+
+    "model_name": {
+      "@id": "tf:modelName",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "tf:version",
+      "@type": "xsd:integer"
+    },
+    "signature_name": {
+      "@id": "tf:signatureName",
+      "@type": "xsd:string"
+    },
+    "instances": {
+      "@id": "tf:instances",
+      "@container": "@list"
+    },
+    "inputs": {
+      "@id": "tf:inputs",
+      "@type": "@json"
+    },
+    "predictions": {
+      "@id": "tf:predictions",
+      "@container": "@list"
+    },
+    "outputs": {
+      "@id": "tf:outputs",
+      "@type": "@json"
+    },
+    "state": {
+      "@id": "tf:state",
+      "@type": "@vocab",
+      "@context": {
+        "AVAILABLE": "tf:AVAILABLE",
+        "LOADING": "tf:LOADING",
+        "UNLOADING": "tf:UNLOADING",
+        "START": "tf:START",
+        "END": "tf:END",
+        "UNKNOWN": "tf:UNKNOWN"
+      }
+    },
+    "model_version_status": {
+      "@id": "tf:modelVersionStatus",
+      "@container": "@list"
+    },
+
+    "machineLearning": {
+      "@id": "schema:SoftwareApplication",
+      "rdfs:comment": "Machine learning platform"
+    },
+    "Organization": "schema:Organization",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url"
+  }
+}
