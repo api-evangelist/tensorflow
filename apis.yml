@@ -160,7 +160,7 @@ common:
     url: https://github.com/tensorflow/tensorflow/blob/master/LICENSE
   - type: Forum
     url: https://discuss.tensorflow.org/
-  - type: Stack Overflow
+  - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/tensorflow
   - type: OpenAPI
     url: >-
