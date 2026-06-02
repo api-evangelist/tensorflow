@@ -2,12 +2,20 @@
   "repo": "tensorflow",
   "feeds": [
     {
-      "source": "https://blog.tensorflow.org/",
+      "source": "https://blog.tensorflow.org/atom.xml",
       "feed_url": "https://blog.tensorflow.org/atom.xml",
-      "title": "The TensorFlow Blog",
-      "saved": 23
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.linkedin.com/showcase/tensorflowdev",
+      "feed_url": "https://www.linkedin.com/showcase/tensorflowdev",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 33,
-  "fetched": "2026-05-17T20:20:35Z"
+  "fetched": "2026-06-01T23:35:02Z"
 }
