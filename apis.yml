@@ -141,7 +141,7 @@ common:
     url: https://www.linkedin.com/showcase/tensorflowdev
   - type: Blog
     url: https://blog.tensorflow.org/
-  - type: GitHub Org
+  - type: GitHubOrg
     url: https://github.com/tensorflow
   - type: Twitter
     url: https://twitter.com/tensorflow
@@ -149,7 +149,7 @@ common:
     url: https://www.youtube.com/tensorflow
   - type: License
     url: https://github.com/tensorflow/tensorflow/blob/master/LICENSE
-  - type: Forum
+  - type: Forums
     url: https://discuss.tensorflow.org/
   - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/tensorflow
