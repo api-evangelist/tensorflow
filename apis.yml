@@ -137,6 +137,8 @@ include:
   - name: TensorFlow Community
     url: https://www.tensorflow.org/community
 common:
+  - type: DomainSecurity
+    url: security/tensorflow-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/showcase/tensorflowdev
   - type: Blog
