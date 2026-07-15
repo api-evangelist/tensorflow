@@ -137,6 +137,8 @@ include:
   - name: TensorFlow Community
     url: https://www.tensorflow.org/community
 common:
+  - type: AgenticAccess
+    url: agentic-access/tensorflow-agentic-access.yml
   - type: DomainSecurity
     url: security/tensorflow-domain-security.yml
   - type: LinkedIn
