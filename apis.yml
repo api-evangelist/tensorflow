@@ -18,7 +18,7 @@ tags:
   - Python
 url: https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/apis.yml
 created: '2024-01-15'
-modified: '2026-05-19'
+modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
   - aid: tensorflow:tensorflow-serving-rest
@@ -141,6 +141,36 @@ common:
     url: agentic-access/tensorflow-agentic-access.yml
   - type: DomainSecurity
     url: security/tensorflow-domain-security.yml
+  - type: Packages
+    url: packages/tensorflow-packages.yml
+  - type: MCPServer
+    url: mcp/tensorflow-mcp.yml
+  - type: LLMsTxt
+    url: llms/tensorflow-llms.txt
+  - type: Overlay
+    url: overlays/tensorflow-serving-overlay.yaml
+  - type: Protobuf
+    url: grpc/tensorflow-prediction-service.proto
+  - type: Protobuf
+    url: grpc/tensorflow-model-service.proto
+  - type: Conformance
+    url: conformance/tensorflow-conformance.yml
+  - type: ErrorCatalog
+    url: errors/tensorflow-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/tensorflow-lifecycle.yml
+  - type: Authentication
+    url: authentication/tensorflow-authentication.yml
+  - type: Sandbox
+    url: sandbox/tensorflow-sandbox.yml
+  - type: Conventions
+    url: conventions/tensorflow-conventions.yml
+  - type: ChangeLog
+    url: changelog/tensorflow-changelog.yml
+  - type: CLI
+    url: cli/tensorflow-cli.yml
+  - type: DataModel
+    url: data-model/tensorflow-data-model.yml
   - type: LinkedIn
     url: https://www.linkedin.com/showcase/tensorflowdev
   - type: Blog

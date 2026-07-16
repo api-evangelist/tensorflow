@@ -1,0 +1,19 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/tensorflow-serving-openapi.yml
+summary:
+  types: []
+  api_key_in: []
+  oauth2_flows: []
+  note: >-
+    TensorFlow Serving (ModelServer) ships with NO built-in authentication. The OpenAPI declares
+    no securitySchemes and the REST/gRPC endpoints are open on the configured host:port (default
+    8501 REST / 8500 gRPC). Access control is expected to be provided out-of-band by the operator:
+    a reverse proxy (nginx/Envoy), an API gateway, a service mesh (mTLS), or network isolation
+    (private VPC / Kubernetes NetworkPolicy). Because the server is self-hosted per deployment,
+    there is no provider-wide auth model, OAuth scopes, or API-key issuance to catalog.
+schemes: []
+recommendations:
+  - Terminate TLS and enforce authentication at a fronting proxy or gateway.
+  - Use gRPC over mTLS via a service mesh for in-cluster traffic.
+  - Restrict the ModelServer port to trusted networks; never expose 8501/8500 publicly unguarded.

@@ -1,0 +1,27 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for TensorFlow Serving REST API
+  version: 1.0.0
+extends: openapi/tensorflow-serving-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: tensorflow
+      x-apievangelist-artifacts:
+        - grpc/tensorflow-prediction-service.proto
+        - grpc/tensorflow-model-service.proto
+        - errors/tensorflow-problem-types.yml
+        - conventions/tensorflow-conventions.yml
+        - data-model/tensorflow-data-model.yml
+        - conformance/tensorflow-conformance.yml
+        - authentication/tensorflow-authentication.yml
+  - target: $.info
+    update:
+      x-api-transport: [rest, grpc]
+      x-authentication: none-builtin
+  - target: $.tags[?(@.name=='Inference')]
+    update:
+      x-agentic-action-class: acting
+  - target: $.tags[?(@.name=='Models')]
+    update:
+      x-agentic-action-class: connected

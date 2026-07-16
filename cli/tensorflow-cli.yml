@@ -1,0 +1,29 @@
+generated: '2026-06-20'
+method: searched
+source: https://www.tensorflow.org/guide/saved_model, https://www.tensorflow.org/tensorboard, https://www.tensorflow.org/js/guide/conversion, https://www.tensorflow.org/lite/models/convert
+note: >-
+  TensorFlow ships several first-party command-line tools rather than one unified CLI. Each is
+  installed with its corresponding package (see packages/tensorflow-packages.yml).
+tools:
+  - name: saved_model_cli
+    package: tensorflow (PyPI)
+    description: Inspect and run SavedModels — list signatures, tensor shapes/dtypes, and execute a signature.
+    key_commands:
+      - "saved_model_cli show --dir <path> --all"
+      - "saved_model_cli run --dir <path> --tag_set serve --signature_def serving_default --input_exprs '...'"
+  - name: tensorboard
+    package: tensorboard (PyPI)
+    description: Launch the TensorBoard visualization web server against a logdir.
+    key_commands:
+      - "tensorboard --logdir <dir>"
+      - "tensorboard --logdir <dir> --port 6006"
+  - name: tensorflowjs_converter
+    package: tensorflowjs (PyPI)
+    description: Convert TensorFlow SavedModels/Keras models to the TensorFlow.js web format.
+    key_commands:
+      - "tensorflowjs_converter --input_format=tf_saved_model <src> <dest>"
+  - name: tflite_convert
+    package: tensorflow (PyPI)
+    description: Convert TensorFlow models to the TensorFlow Lite (.tflite) format for on-device inference.
+    key_commands:
+      - "tflite_convert --saved_model_dir=<dir> --output_file=<model.tflite>"

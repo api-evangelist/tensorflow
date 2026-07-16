@@ -1,0 +1,33 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/tensorflow-serving-openapi.yml, grpc/*.proto
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: openapi/tensorflow-serving-openapi.yml is OpenAPI 3.0.3
+  - id: grpc
+    conforms: true
+    evidence: PredictionService and ModelService gRPC services defined in grpc/*.proto
+  - id: protobuf
+    conforms: true
+    evidence: proto3 message/service definitions published in tensorflow/serving
+  - id: json
+    conforms: true
+    evidence: all Serving REST requests/responses use application/json
+  - id: oauth2
+    conforms: false
+    evidence: OpenAPI declares no securitySchemes; ModelServer ships without built-in auth
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: errors returned as a plain {error} JSON object, not application/problem+json
+  - id: pagination
+    conforms: false
+    evidence: inference/model APIs are not collection-paginated
+  - id: idempotency
+    conforms: false
+    evidence: no Idempotency-Key support; inference is naturally repeatable but unmanaged
+  - id: rest-versioning
+    conforms: true
+    evidence: URI-path versioning via /v1 and per-model /versions/{version}

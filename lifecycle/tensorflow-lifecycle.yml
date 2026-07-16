@@ -1,0 +1,28 @@
+generated: '2026-06-20'
+method: searched
+source: https://www.tensorflow.org/tfx/serving/api_rest, https://github.com/tensorflow/serving/releases, https://www.tensorflow.org/versions
+versioning:
+  scheme: uri-path
+  current: v1
+  api_version_header: false
+  note: >-
+    The Serving REST API is versioned in the URI path (/v1). Model versions are addressed
+    independently via /versions/{version} and can be aliased with /labels/{label} (e.g. "stable",
+    "canary") for A/B and canary rollouts managed by the ModelServer version policy.
+release_cadence:
+  scheme: semver
+  note: >-
+    TensorFlow and TensorFlow Serving follow semantic versioning and release roughly in step
+    (TF Serving 2.x tracks TensorFlow 2.x). Minor releases ship several times a year.
+  releases: https://github.com/tensorflow/serving/releases
+deprecation:
+  policy_url: https://www.tensorflow.org/guide/versions
+  sunset_header: false
+  note: >-
+    TensorFlow's compatibility guarantees (tf.compat, SavedModel format stability) govern
+    deprecation. The Serving HTTP surface itself has been stable at /v1 across the 2.x line;
+    no RFC 8594 Sunset/Deprecation response headers are emitted.
+sla:
+  note: Self-hosted open-source software — no provider-operated SLA. Availability is the operator's responsibility.
+status_page: null
+deprecated_operations: []

@@ -1,0 +1,51 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/tensorflow-serving-openapi.yml
+note: >-
+  Derived from the TensorFlow Serving OpenAPI component schemas. The Serving API is inference-oriented
+  rather than a CRUD resource graph, so entities relate by conceptual containment (a model has many
+  versions; inference requests/responses reference a model) rather than by stored id-foreign-keys.
+entities:
+  - name: Model
+    identified_by: model_name
+    description: A served SavedModel, addressed by name in the ModelServer.
+    relationships:
+      - type: has_many
+        target: ModelVersion
+        via: versions
+      - type: has_many
+        target: ModelLabel
+        via: labels
+  - name: ModelVersion
+    identified_by: version
+    description: A specific numbered version of a model; carries a lifecycle state (LOADING/AVAILABLE/UNLOADING...).
+    source_schema: ModelStatusResponse
+    relationships:
+      - type: belongs_to
+        target: Model
+        via: model_name
+  - name: ModelLabel
+    identified_by: label
+    description: A named alias (e.g. stable, canary) pointing at a model version.
+    relationships:
+      - type: belongs_to
+        target: Model
+        via: model_name
+  - name: ModelMetadata
+    source_schema: ModelMetadataResponse
+    description: Signature definitions and model_spec (name + version) for a served model.
+    relationships:
+      - type: belongs_to
+        target: ModelVersion
+        via: model_spec.version
+  - name: InferenceRequest
+    source_schemas: [ClassifyRequest, RegressRequest, PredictRequest]
+    description: Classify/Regress/Predict input referencing a model signature.
+    relationships:
+      - type: belongs_to
+        target: Model
+        via: model_name
+  - name: InferenceResponse
+    source_schemas: [ClassifyResponse, RegressResponse, PredictResponse]
+    description: Inference output (result / predictions / outputs).
+render: null

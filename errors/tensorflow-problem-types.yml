@@ -1,0 +1,41 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/tensorflow-serving-openapi.yml
+format: plain-json
+envelope:
+  field: error
+  media_type: application/json
+  note: >-
+    TensorFlow Serving returns errors as a JSON object with a single human-readable "error"
+    string (not RFC 9457 application/problem+json). The HTTP status carries the class; the
+    "error" string carries the detail (e.g. gRPC status message surfaced over REST).
+problems:
+  - status: 400
+    title: Invalid request format
+    description: >-
+      The request body could not be parsed or violated the classify/regress/predict schema
+      (malformed JSON, mixed row+column format, or shape mismatch with the model signature).
+    source_operations:
+      - openapi/tensorflow-serving-openapi.yml#classifyModel
+      - openapi/tensorflow-serving-openapi.yml#classifyModelVersion
+      - openapi/tensorflow-serving-openapi.yml#regressModel
+      - openapi/tensorflow-serving-openapi.yml#regressModelVersion
+      - openapi/tensorflow-serving-openapi.yml#predictModel
+      - openapi/tensorflow-serving-openapi.yml#predictModelVersion
+    remediation: >-
+      Send exactly one of "instances" (row) or "inputs" (column); match the model's SignatureDef
+      input tensor names, dtypes, and shapes. Use getModelMetadata to inspect the signature.
+  - status: 404
+    title: Model, version, or label not found
+    description: >-
+      The named model is not loaded by the ModelServer, or the requested version/label does not
+      resolve to a served version.
+    source_operations:
+      - openapi/tensorflow-serving-openapi.yml#getModelStatus
+      - openapi/tensorflow-serving-openapi.yml#getModelVersionStatus
+      - openapi/tensorflow-serving-openapi.yml#getModelLabelStatus
+      - openapi/tensorflow-serving-openapi.yml#getModelMetadata
+      - openapi/tensorflow-serving-openapi.yml#getModelVersionMetadata
+    remediation: >-
+      Confirm the model name matches the ModelServer model_config_list, that the version is in the
+      AVAILABLE state (getModelStatus), and that version labels are enabled in the server config.

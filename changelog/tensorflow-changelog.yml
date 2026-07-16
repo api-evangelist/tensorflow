@@ -1,0 +1,35 @@
+generated: '2026-06-20'
+method: searched
+source: https://blog.tensorflow.org/, https://github.com/tensorflow/tensorflow/releases
+scheme: semver
+current_version: '2.21.0'
+note: >-
+  TensorFlow follows semantic versioning; minor releases ship several times a year with a matching
+  "What's new in TensorFlow" blog post. Recent-window entries below are drawn from the dated
+  release announcements captured in this repo's blogs/ and the GitHub releases page.
+entries:
+  - version: '2.20'
+    date: '2025-08-19'
+    highlights: What's new in TensorFlow 2.20.
+    source: https://blog.tensorflow.org/
+  - version: '2.19'
+    date: '2025-03-13'
+    highlights: What's new in TensorFlow 2.19.
+    source: https://blog.tensorflow.org/
+  - version: '2.18'
+    date: '2024-10-28'
+    highlights: What's new in TensorFlow 2.18.
+    source: https://blog.tensorflow.org/
+  - version: '2.17'
+    date: '2024-07-18'
+    highlights: What's new in TensorFlow 2.17.
+    source: https://blog.tensorflow.org/
+  - version: '2.16'
+    date: '2024-03-13'
+    highlights: What's new in TensorFlow 2.16 (Keras 3 as the default Keras).
+    source: https://blog.tensorflow.org/
+  - version: '2.15'
+    date: '2023-11-17'
+    highlights: What's new in TensorFlow 2.15.
+    source: https://blog.tensorflow.org/
+full_changelog: https://github.com/tensorflow/tensorflow/releases

@@ -1,0 +1,49 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/tensorflow-serving-openapi.yml, https://www.tensorflow.org/tfx/serving/api_rest
+authentication:
+  style: none-builtin
+  detail: See authentication/tensorflow-authentication.yml — access control is delegated to a fronting proxy/gateway/mesh.
+content_type:
+  request: application/json
+  response: application/json
+  note: All Serving REST inference requests and responses are JSON.
+versioning:
+  style: uri-path
+  api: /v1
+  model_selection:
+    by_version: /v1/models/{model_name}/versions/{version}
+    by_label: /v1/models/{model_name}/labels/{label}
+  detail: See lifecycle/tensorflow-lifecycle.yml.
+inference_formats:
+  row:
+    field: instances
+    note: Array of individual inputs; response returns "predictions".
+  column:
+    field: inputs
+    note: Map of tensor name to value arrays; response returns "outputs".
+  rule: A predict request must set exactly one of "instances" or "inputs", never both.
+  signature_selection:
+    field: signature_name
+    note: Optional; selects a named SignatureDef from the SavedModel.
+pagination:
+  supported: false
+  note: Inference and model-status APIs are single-resource; no collection pagination.
+idempotency:
+  header: null
+  supported: false
+  note: No Idempotency-Key mechanism; inference calls are naturally repeatable but not deduplicated by the server.
+request_tracing:
+  request_id_header: null
+  note: No provider request-id header; tracing is added by the operator's proxy/mesh.
+rate_limiting:
+  signaling: none-builtin
+  note: The ModelServer does not emit rate-limit headers; throttling is an operator concern. See rate-limits/tensorflow-rate-limits.yml.
+error_envelope:
+  media_type: application/json
+  field: error
+  detail: See errors/tensorflow-problem-types.yml.
+transports:
+  - rest
+  - grpc
+grpc_note: The same models are served over gRPC (PredictionService/ModelService); see grpc/*.proto.

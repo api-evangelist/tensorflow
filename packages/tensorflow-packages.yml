@@ -1,0 +1,66 @@
+generated: '2026-06-20'
+method: searched
+source: pypi.org, registry.npmjs.org, repo1.maven.org
+packages:
+  - language: python
+    registry: pypi
+    name: tensorflow
+    version: 2.21.0
+    url: https://pypi.org/project/tensorflow/
+    install: pip install tensorflow
+    official: true
+    description: Core TensorFlow machine learning platform for Python (CPU + GPU).
+  - language: python
+    registry: pypi
+    name: tensorflow-serving-api
+    version: 2.20.0
+    url: https://pypi.org/project/tensorflow-serving-api/
+    install: pip install tensorflow-serving-api
+    official: true
+    description: gRPC/protobuf client stubs for the TensorFlow Serving PredictionService and ModelService APIs.
+  - language: python
+    registry: pypi
+    name: tensorflow-hub
+    version: 0.16.1
+    url: https://pypi.org/project/tensorflow-hub/
+    install: pip install tensorflow-hub
+    official: true
+    description: Library for reusable, pre-trained ML modules (TensorFlow Hub).
+  - language: python
+    registry: pypi
+    name: tensorboard
+    version: 2.21.0
+    url: https://pypi.org/project/tensorboard/
+    install: pip install tensorboard
+    official: true
+    description: TensorFlow's visualization and experiment-tracking toolkit.
+  - language: python
+    registry: pypi
+    name: tflite-runtime
+    url: https://pypi.org/project/tflite-runtime/
+    install: pip install tflite-runtime
+    official: true
+    description: Minimal TensorFlow Lite interpreter runtime for on-device inference.
+  - language: javascript
+    registry: npm
+    name: "@tensorflow/tfjs"
+    version: 4.22.0
+    url: https://www.npmjs.com/package/@tensorflow/tfjs
+    install: npm install @tensorflow/tfjs
+    official: true
+    description: TensorFlow.js — train and run ML models in the browser and Node.js.
+  - language: javascript
+    registry: npm
+    name: "@tensorflow/tfjs-node"
+    version: 4.22.0
+    url: https://www.npmjs.com/package/@tensorflow/tfjs-node
+    install: npm install @tensorflow/tfjs-node
+    official: true
+    description: Native (libtensorflow) backend for TensorFlow.js on Node.js.
+  - language: java
+    registry: maven
+    name: org.tensorflow:tensorflow-core-api
+    url: https://repo1.maven.org/maven2/org/tensorflow/tensorflow-core-api/
+    install: "implementation 'org.tensorflow:tensorflow-core-api'"
+    official: true
+    description: TensorFlow Java core API bindings (org.tensorflow).

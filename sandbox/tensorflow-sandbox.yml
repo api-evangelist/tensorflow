@@ -1,0 +1,30 @@
+generated: '2026-06-20'
+method: searched
+source: https://www.tensorflow.org/tfx/serving/api_rest, https://www.tensorflow.org/tfx/serving/docker
+note: >-
+  TensorFlow Serving is self-hosted, so its "sandbox" is a published demo model plus the official
+  Docker image that lets anyone stand up a working ModelServer locally. Values below are published
+  verbatim in the TensorFlow Serving docs; no test values are invented.
+test_model:
+  name: saved_model_half_plus_two
+  description: >-
+    The canonical demo SavedModel used throughout the Serving REST API docs. It returns
+    y = 0.5 * x + 2 for every input x, so responses are deterministic and easy to verify.
+  source: https://github.com/tensorflow/serving/tree/master/tensorflow_serving/servables/tensorflow/testdata
+docker:
+  image: tensorflow/serving
+  registry: https://hub.docker.com/r/tensorflow/serving
+  quickstart: >-
+    docker run -p 8501:8501 --mount type=bind,source=/path/to/saved_model_half_plus_two,target=/models/half_plus_two
+    -e MODEL_NAME=half_plus_two -t tensorflow/serving
+  rest_port: 8501
+  grpc_port: 8500
+example_calls:
+  predict:
+    method: POST
+    url: http://localhost:8501/v1/models/half_plus_two:predict
+    body: '{"instances": [1.0, 2.0, 5.0]}'
+    expected: '{"predictions": [2.5, 3.0, 4.5]}'
+  status:
+    method: GET
+    url: http://localhost:8501/v1/models/half_plus_two
