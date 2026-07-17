@@ -1,0 +1,140 @@
+arazzo: 1.0.1
+info:
+  title: TensorFlow Serving Gate a Rollout on Version Readiness
+  summary: Poll a newly exported model version until it reports AVAILABLE, then smoke test it before traffic is shifted.
+  description: >-
+    The deployment gate that belongs at the end of a training pipeline. After a
+    SavedModel is exported into the ModelServer's model base path, the server
+    discovers and loads it asynchronously, which means there is a window where
+    the version exists but is still in the LOADING state, or has failed to load
+    and is carrying an error status. Shifting traffic during that window is what
+    turns a good model into an incident. This workflow polls the version's status
+    until it settles into AVAILABLE, confirms the signature the pipeline expected
+    was actually exported, and runs a single smoke prediction against the pinned
+    version, so the rollout only proceeds once the model has proven it can
+    answer. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: tensorflowServingApi
+  url: ../openapi/tensorflow-serving-openapi.yml
+  type: openapi
+workflows:
+- workflowId: rollout-readiness
+  summary: Wait for a model version to load, confirm its signature, and smoke test it.
+  description: >-
+    Retries the version status check while the ModelServer loads the newly
+    exported version, then reads its metadata and sends a known smoke test input
+    to confirm the version can actually serve before it is promoted.
+  inputs:
+    type: object
+    required:
+    - modelName
+    - version
+    - smokeInstances
+    properties:
+      modelName:
+        type: string
+        description: The name the model was registered under in the ModelServer.
+      version:
+        type: integer
+        description: The version number of the freshly exported model to gate on.
+      signatureName:
+        type: string
+        description: Optional signature the smoke test should target.
+      smokeInstances:
+        type: array
+        description: >-
+          A small, known input whose prediction is cheap to sanity check. This is
+          a liveness check on the exported version, not an accuracy evaluation.
+        items: {}
+  steps:
+  - stepId: awaitVersionLoad
+    description: >-
+      Poll the version's status until the ModelServer reports AVAILABLE. The
+      newly exported version is commonly in the LOADING state for the first few
+      seconds after export, so the check is retried rather than failed on the
+      first look.
+    operationId: getModelVersionStatus
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $inputs.version
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.model_version_status[0].state == 'AVAILABLE'
+      type: jsonpath
+    onFailure:
+    - name: waitForLoading
+      type: retry
+      retryAfter: 5
+      retryLimit: 24
+      criteria:
+      - condition: $statusCode == 404
+    - name: stillLoading
+      type: retry
+      retryAfter: 5
+      retryLimit: 24
+      criteria:
+      - context: $response.body
+        condition: $.model_version_status[0].state == 'LOADING'
+        type: jsonpath
+    - name: loadFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.model_version_status[0].state == 'END'
+        type: jsonpath
+    outputs:
+      readyState: $response.body#/model_version_status/0/state
+      readyVersion: $response.body#/model_version_status/0/version
+      loadErrorCode: $response.body#/model_version_status/0/status/error_code
+      loadErrorMessage: $response.body#/model_version_status/0/status/error_message
+  - stepId: confirmSignature
+    description: >-
+      Read the loaded version's metadata to confirm the training pipeline
+      exported the signature the serving clients expect, catching an export that
+      loaded cleanly but has the wrong shape.
+    operationId: getModelVersionMetadata
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $inputs.version
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      modelSpecName: $response.body#/model_spec/name
+      modelSpecVersion: $response.body#/model_spec/version
+      signatureMetadata: $response.body#/metadata
+  - stepId: smokeTestVersion
+    description: >-
+      Send the smoke test input to the pinned version. A successful prediction is
+      the signal that the rollout may proceed; anything else should hold it.
+    operationId: predictModelVersion
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $inputs.version
+    requestBody:
+      contentType: application/json
+      payload:
+        signature_name: $inputs.signatureName
+        instances: $inputs.smokeInstances
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      smokePredictions: $response.body#/predictions
+  outputs:
+    readyVersion: $steps.awaitVersionLoad.outputs.readyVersion
+    modelSpecVersion: $steps.confirmSignature.outputs.modelSpecVersion
+    smokePredictions: $steps.smokeTestVersion.outputs.smokePredictions

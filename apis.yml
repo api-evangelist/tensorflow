@@ -171,6 +171,27 @@ common:
     url: cli/tensorflow-cli.yml
   - type: DataModel
     url: data-model/tensorflow-data-model.yml
+  - type: Arazzo
+    url: arazzo/tensorflow-predict-preflight-workflow.yml
+    name: TensorFlow Preflight a Model and Run Prediction
+  - type: Arazzo
+    url: arazzo/tensorflow-classify-preflight-workflow.yml
+    name: TensorFlow Preflight a Model and Run Classification
+  - type: Arazzo
+    url: arazzo/tensorflow-regress-preflight-workflow.yml
+    name: TensorFlow Preflight a Model and Run Regression
+  - type: Arazzo
+    url: arazzo/tensorflow-version-canary-compare-workflow.yml
+    name: TensorFlow Compare a Candidate Version Against the Default
+  - type: Arazzo
+    url: arazzo/tensorflow-label-routed-inference-workflow.yml
+    name: TensorFlow Route Inference by Version Label
+  - type: Arazzo
+    url: arazzo/tensorflow-pinned-example-scoring-workflow.yml
+    name: TensorFlow Pinned Reproducible Example Scoring
+  - type: Arazzo
+    url: arazzo/tensorflow-rollout-readiness-workflow.yml
+    name: TensorFlow Gate a Rollout on Version Readiness
   - type: LinkedIn
     url: https://www.linkedin.com/showcase/tensorflowdev
   - type: Blog

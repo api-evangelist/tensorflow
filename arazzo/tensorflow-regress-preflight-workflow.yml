@@ -1,0 +1,105 @@
+arazzo: 1.0.1
+info:
+  title: TensorFlow Serving Preflight and Regress
+  summary: Confirm a model is loaded and its signature is known before running regression inference.
+  description: >-
+    Regression in TensorFlow Serving follows PredictionService.Regress semantics
+    and, like classify, takes tf.Example style inputs through the examples array
+    rather than the instances array used by predict. It returns a single numeric
+    value per input example instead of label and score pairs. This workflow
+    checks that the model reports an AVAILABLE version, reads its metadata to
+    confirm the regression signature, and then submits the examples for scoring.
+    Every step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: tensorflowServingApi
+  url: ../openapi/tensorflow-serving-openapi.yml
+  type: openapi
+workflows:
+- workflowId: regress-preflight
+  summary: Check model status, read the signature, then run regression inference.
+  description: >-
+    Verifies the named model reports an AVAILABLE version, resolves its signature
+    metadata, and submits tf.Example inputs for regression, returning one numeric
+    result per example.
+  inputs:
+    type: object
+    required:
+    - modelName
+    - examples
+    properties:
+      modelName:
+        type: string
+        description: The name the model was registered under in the ModelServer.
+      signatureName:
+        type: string
+        description: >-
+          Optional regression signature to target. When omitted the ModelServer
+          uses the model's default serving signature.
+      context:
+        type: object
+        description: Optional context features shared across every supplied example.
+      examples:
+        type: array
+        description: The tf.Example style input records to score, one numeric result returned per example.
+        items:
+          type: object
+  steps:
+  - stepId: checkModelStatus
+    description: >-
+      Confirm the ModelServer has the model loaded and reports a version in the
+      AVAILABLE state before any inference is attempted.
+    operationId: getModelStatus
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.model_version_status[0].state == 'AVAILABLE'
+      type: jsonpath
+    outputs:
+      servingState: $response.body#/model_version_status/0/state
+      servingVersion: $response.body#/model_version_status/0/version
+      errorMessage: $response.body#/model_version_status/0/status/error_message
+  - stepId: readModelMetadata
+    description: >-
+      Read the metadata of the latest available version to confirm the model
+      exposes a regression signature and to see the features it expects.
+    operationId: getModelMetadata
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      modelSpecName: $response.body#/model_spec/name
+      modelSpecVersion: $response.body#/model_spec/version
+      signatureMetadata: $response.body#/metadata
+  - stepId: runRegression
+    description: >-
+      Submit the examples for regression against the model's latest available
+      version, returning the predicted numeric value for each example.
+    operationId: regressModel
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    requestBody:
+      contentType: application/json
+      payload:
+        signature_name: $inputs.signatureName
+        context: $inputs.context
+        examples: $inputs.examples
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      result: $response.body#/result
+      firstValue: $response.body#/result/0
+  outputs:
+    servingVersion: $steps.checkModelStatus.outputs.servingVersion
+    modelSpecVersion: $steps.readModelMetadata.outputs.modelSpecVersion
+    result: $steps.runRegression.outputs.result

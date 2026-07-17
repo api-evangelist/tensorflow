@@ -1,0 +1,102 @@
+arazzo: 1.0.1
+info:
+  title: TensorFlow Serving Preflight and Predict
+  summary: Confirm a model is loaded and its signature is known before running prediction inference.
+  description: >-
+    The canonical TensorFlow Serving integration pattern. Firing inference at a
+    ModelServer blind is the most common source of confusing 400s and empty
+    predictions, because the model may still be LOADING, may have failed to load,
+    or may expose a different signature than the caller assumes. This workflow
+    checks the serving state of the model, reads its metadata to confirm the
+    signature the request will target, and only then submits the prediction.
+    Every step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: tensorflowServingApi
+  url: ../openapi/tensorflow-serving-openapi.yml
+  type: openapi
+workflows:
+- workflowId: predict-preflight
+  summary: Check model status, read the signature, then run prediction inference.
+  description: >-
+    Verifies the named model reports an AVAILABLE version, resolves its signature
+    metadata, and submits a prediction request in either row format (instances)
+    or column format (inputs).
+  inputs:
+    type: object
+    required:
+    - modelName
+    - instances
+    properties:
+      modelName:
+        type: string
+        description: The name the model was registered under in the ModelServer (e.g. "half_plus_two").
+      signatureName:
+        type: string
+        description: >-
+          Optional signature to target. When omitted the ModelServer uses the
+          model's default serving signature.
+      instances:
+        type: array
+        description: >-
+          Row format input. An array of prediction inputs, where each element is
+          a scalar, a list, or an object of named input tensors.
+        items: {}
+  steps:
+  - stepId: checkModelStatus
+    description: >-
+      Confirm the ModelServer has the model loaded and reports a version in the
+      AVAILABLE state before any inference is attempted.
+    operationId: getModelStatus
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.model_version_status[0].state == 'AVAILABLE'
+      type: jsonpath
+    outputs:
+      servingState: $response.body#/model_version_status/0/state
+      servingVersion: $response.body#/model_version_status/0/version
+      errorCode: $response.body#/model_version_status/0/status/error_code
+  - stepId: readModelMetadata
+    description: >-
+      Read the metadata of the latest available version to confirm the signature
+      the prediction request will target, along with its expected input tensors.
+    operationId: getModelMetadata
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      modelSpecName: $response.body#/model_spec/name
+      modelSpecVersion: $response.body#/model_spec/version
+      signatureMetadata: $response.body#/metadata
+  - stepId: runPrediction
+    description: >-
+      Submit the prediction request against the model's latest available
+      version, returning one prediction per supplied instance.
+    operationId: predictModel
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    requestBody:
+      contentType: application/json
+      payload:
+        signature_name: $inputs.signatureName
+        instances: $inputs.instances
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      predictions: $response.body#/predictions
+      outputs: $response.body#/outputs
+  outputs:
+    servingVersion: $steps.checkModelStatus.outputs.servingVersion
+    modelSpecVersion: $steps.readModelMetadata.outputs.modelSpecVersion
+    predictions: $steps.runPrediction.outputs.predictions

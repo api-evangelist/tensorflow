@@ -1,0 +1,116 @@
+arazzo: 1.0.1
+info:
+  title: TensorFlow Serving Route Inference by Version Label
+  summary: Resolve a version label such as stable or canary to a concrete version, then run inference pinned to it.
+  description: >-
+    TensorFlow ModelServer supports version labels, which let an operator assign
+    names like "stable" and "canary" to specific version numbers and move those
+    labels as models are promoted. Callers can then ask for a label instead of
+    hard coding a version, and the routing changes underneath them without a code
+    deploy. This workflow resolves the label to the concrete version currently
+    behind it, records that version so the run is auditable, confirms the
+    signature, and pins the inference to the resolved version number so a label
+    move mid-flight cannot split a single logical request across two models.
+    Every step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: tensorflowServingApi
+  url: ../openapi/tensorflow-serving-openapi.yml
+  type: openapi
+workflows:
+- workflowId: label-routed-inference
+  summary: Resolve a version label to a version number and predict against that pinned version.
+  description: >-
+    Looks up the model version currently carrying the supplied label, reads that
+    version's metadata, and submits a prediction pinned to the resolved version.
+  inputs:
+    type: object
+    required:
+    - modelName
+    - label
+    - instances
+    properties:
+      modelName:
+        type: string
+        description: The name the model was registered under in the ModelServer.
+      label:
+        type: string
+        description: >-
+          The version label to route by, as configured on the ModelServer
+          (commonly "stable" or "canary").
+      signatureName:
+        type: string
+        description: Optional signature to target. When omitted the model's default serving signature is used.
+      instances:
+        type: array
+        description: Row format prediction inputs, one prediction returned per instance.
+        items: {}
+  steps:
+  - stepId: resolveLabel
+    description: >-
+      Resolve the label to the model version currently behind it and confirm that
+      version is AVAILABLE. The resolved version number is captured as an output
+      so the rest of the flow is pinned and the run stays reproducible even if
+      the label is moved while the flow is executing.
+    operationId: getModelLabelStatus
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: label
+      in: path
+      value: $inputs.label
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.model_version_status[0].state == 'AVAILABLE'
+      type: jsonpath
+    outputs:
+      resolvedVersion: $response.body#/model_version_status/0/version
+      resolvedState: $response.body#/model_version_status/0/state
+      resolvedErrorCode: $response.body#/model_version_status/0/status/error_code
+  - stepId: readResolvedMetadata
+    description: >-
+      Read the signature metadata of the version the label resolved to, so the
+      caller knows exactly which model shape it is about to send inputs to.
+    operationId: getModelVersionMetadata
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $steps.resolveLabel.outputs.resolvedVersion
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      modelSpecVersion: $response.body#/model_spec/version
+      signatureMetadata: $response.body#/metadata
+  - stepId: predictResolvedVersion
+    description: >-
+      Submit the prediction pinned to the version number resolved from the label,
+      rather than to the label itself, so every instance in this request is
+      scored by the same model.
+    operationId: predictModelVersion
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $steps.resolveLabel.outputs.resolvedVersion
+    requestBody:
+      contentType: application/json
+      payload:
+        signature_name: $inputs.signatureName
+        instances: $inputs.instances
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      predictions: $response.body#/predictions
+      outputs: $response.body#/outputs
+  outputs:
+    resolvedVersion: $steps.resolveLabel.outputs.resolvedVersion
+    modelSpecVersion: $steps.readResolvedMetadata.outputs.modelSpecVersion
+    predictions: $steps.predictResolvedVersion.outputs.predictions

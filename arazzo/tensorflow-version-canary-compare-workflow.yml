@@ -1,0 +1,131 @@
+arazzo: 1.0.1
+info:
+  title: TensorFlow Serving Compare a Candidate Version Against the Default
+  summary: Score the same instances against a pinned candidate version and the default version to measure rollout drift.
+  description: >-
+    The standard safeguard before promoting a newly trained model. TensorFlow
+    ModelServer can hold several versions of the same model in memory at once,
+    which makes it possible to send identical inputs to a candidate version and
+    to the version currently serving default traffic, then compare the two
+    responses before shifting any real traffic. This workflow confirms the
+    candidate version has finished loading, reads its signature metadata to be
+    sure it is input compatible with the version in production, and then runs the
+    same instances through both. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: tensorflowServingApi
+  url: ../openapi/tensorflow-serving-openapi.yml
+  type: openapi
+workflows:
+- workflowId: version-canary-compare
+  summary: Run identical instances through a candidate model version and the default version.
+  description: >-
+    Verifies the candidate version is AVAILABLE, confirms its signature, then
+    predicts against the pinned candidate and against the model's default
+    version so the two sets of predictions can be diffed.
+  inputs:
+    type: object
+    required:
+    - modelName
+    - candidateVersion
+    - instances
+    properties:
+      modelName:
+        type: string
+        description: The name the model was registered under in the ModelServer.
+      candidateVersion:
+        type: integer
+        description: The version number of the newly trained candidate to evaluate (e.g. 2).
+      signatureName:
+        type: string
+        description: Optional signature to target on both versions. Must be the same on each side for the comparison to be meaningful.
+      instances:
+        type: array
+        description: >-
+          The evaluation instances sent unchanged to both versions. Holding the
+          input constant is what makes the two responses comparable.
+        items: {}
+  steps:
+  - stepId: checkCandidateStatus
+    description: >-
+      Confirm the candidate version has finished loading and reports AVAILABLE.
+      A candidate still in the LOADING state would otherwise fail the comparison
+      for reasons that have nothing to do with model quality.
+    operationId: getModelVersionStatus
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $inputs.candidateVersion
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.model_version_status[0].state == 'AVAILABLE'
+      type: jsonpath
+    outputs:
+      candidateState: $response.body#/model_version_status/0/state
+      candidateErrorCode: $response.body#/model_version_status/0/status/error_code
+  - stepId: readCandidateMetadata
+    description: >-
+      Read the candidate version's signature metadata to confirm it accepts the
+      same inputs as the version currently serving default traffic.
+    operationId: getModelVersionMetadata
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $inputs.candidateVersion
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      candidateSpecVersion: $response.body#/model_spec/version
+      candidateSignatureMetadata: $response.body#/metadata
+  - stepId: predictCandidate
+    description: >-
+      Score the evaluation instances against the pinned candidate version.
+    operationId: predictModelVersion
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $inputs.candidateVersion
+    requestBody:
+      contentType: application/json
+      payload:
+        signature_name: $inputs.signatureName
+        instances: $inputs.instances
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      candidatePredictions: $response.body#/predictions
+  - stepId: predictDefault
+    description: >-
+      Score the identical instances against the model's default version, the one
+      currently answering unpinned production traffic, to produce the baseline
+      the candidate is judged against.
+    operationId: predictModel
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    requestBody:
+      contentType: application/json
+      payload:
+        signature_name: $inputs.signatureName
+        instances: $inputs.instances
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      defaultPredictions: $response.body#/predictions
+  outputs:
+    candidateSpecVersion: $steps.readCandidateMetadata.outputs.candidateSpecVersion
+    candidatePredictions: $steps.predictCandidate.outputs.candidatePredictions
+    defaultPredictions: $steps.predictDefault.outputs.defaultPredictions

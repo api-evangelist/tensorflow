@@ -1,0 +1,151 @@
+arazzo: 1.0.1
+info:
+  title: TensorFlow Serving Pinned Reproducible Example Scoring
+  summary: Pin a model version and score the same tf.Example inputs through both its classify and regress signatures.
+  description: >-
+    When a scoring decision has to be defended later, the version that produced
+    it cannot be left to whatever the ModelServer happened to consider default at
+    the time. This workflow pins an explicit version number for the whole run and
+    keeps it fixed across every call, so the result can be reproduced exactly by
+    replaying the flow with the same inputs. It suits models that expose both a
+    classification and a regression signature over the same tf.Example records,
+    where a decision needs both the predicted class and the associated numeric
+    estimate captured together against one known version. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: tensorflowServingApi
+  url: ../openapi/tensorflow-serving-openapi.yml
+  type: openapi
+workflows:
+- workflowId: pinned-example-scoring
+  summary: Classify and regress the same examples against one explicitly pinned model version.
+  description: >-
+    Confirms the pinned version is AVAILABLE, records its signature metadata for
+    the audit trail, then runs the same tf.Example records through the pinned
+    version's classification and regression signatures.
+  inputs:
+    type: object
+    required:
+    - modelName
+    - version
+    - examples
+    properties:
+      modelName:
+        type: string
+        description: The name the model was registered under in the ModelServer.
+      version:
+        type: integer
+        description: >-
+          The exact model version to pin the whole run to. Supplied explicitly
+          rather than resolved, so the run can be replayed against the same model.
+      classifySignatureName:
+        type: string
+        description: Optional classification signature to target on the pinned version.
+      regressSignatureName:
+        type: string
+        description: Optional regression signature to target on the pinned version.
+      context:
+        type: object
+        description: Optional context features shared across every supplied example.
+      examples:
+        type: array
+        description: >-
+          The tf.Example style records to score. The same records are sent to
+          both signatures so the class and the numeric estimate describe the
+          same inputs.
+        items:
+          type: object
+  steps:
+  - stepId: checkPinnedVersion
+    description: >-
+      Confirm the pinned version is loaded and AVAILABLE. If the version has been
+      unloaded or garbage collected the run must fail loudly rather than silently
+      fall through to a different version.
+    operationId: getModelVersionStatus
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $inputs.version
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.model_version_status[0].state == 'AVAILABLE'
+      type: jsonpath
+    outputs:
+      pinnedState: $response.body#/model_version_status/0/state
+      pinnedVersion: $response.body#/model_version_status/0/version
+      pinnedErrorMessage: $response.body#/model_version_status/0/status/error_message
+  - stepId: readPinnedMetadata
+    description: >-
+      Capture the pinned version's signature metadata as part of the audit
+      record, so the exact model shape behind the scores is retained alongside
+      them.
+    operationId: getModelVersionMetadata
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $inputs.version
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      modelSpecName: $response.body#/model_spec/name
+      modelSpecVersion: $response.body#/model_spec/version
+      signatureMetadata: $response.body#/metadata
+  - stepId: classifyPinned
+    description: >-
+      Run the examples through the pinned version's classification signature,
+      returning the label and score pairs for each record.
+    operationId: classifyModelVersion
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $inputs.version
+    requestBody:
+      contentType: application/json
+      payload:
+        signature_name: $inputs.classifySignatureName
+        context: $inputs.context
+        examples: $inputs.examples
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      classifyResult: $response.body#/result
+  - stepId: regressPinned
+    description: >-
+      Run the identical examples through the same pinned version's regression
+      signature, returning the numeric estimate that accompanies each
+      classification.
+    operationId: regressModelVersion
+    parameters:
+    - name: model_name
+      in: path
+      value: $inputs.modelName
+    - name: version
+      in: path
+      value: $inputs.version
+    requestBody:
+      contentType: application/json
+      payload:
+        signature_name: $inputs.regressSignatureName
+        context: $inputs.context
+        examples: $inputs.examples
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      regressResult: $response.body#/result
+  outputs:
+    pinnedVersion: $steps.checkPinnedVersion.outputs.pinnedVersion
+    signatureMetadata: $steps.readPinnedMetadata.outputs.signatureMetadata
+    classifyResult: $steps.classifyPinned.outputs.classifyResult
+    regressResult: $steps.regressPinned.outputs.regressResult
