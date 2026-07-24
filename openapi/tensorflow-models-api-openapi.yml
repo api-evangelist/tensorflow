@@ -1,0 +1,239 @@
+openapi: 3.0.3
+info:
+  title: TensorFlow Serving REST Inference Models API
+  description: A flexible, high-performance serving system for machine learning models designed for production environments. TensorFlow ModelServer supports REST APIs for model status checks, metadata retrieval, classification, regression, and prediction inference. All requests and responses use JSON format.
+  version: '2.0'
+  contact:
+    name: TensorFlow Team
+    url: https://www.tensorflow.org/
+  license:
+    name: Apache 2.0
+    url: https://github.com/tensorflow/serving/blob/master/LICENSE
+servers:
+- url: http://{host}:{port}
+  description: TensorFlow ModelServer
+  variables:
+    host:
+      default: localhost
+      description: ModelServer hostname
+    port:
+      default: '8501'
+      description: REST API port (default 8501)
+tags:
+- name: Models
+  description: Model status and metadata operations
+paths:
+  /v1/models/{model_name}:
+    get:
+      operationId: getModelStatus
+      summary: Get Model Status
+      description: Returns the status of a model in the ModelServer, including the state and any error status for each version of the model.
+      tags:
+      - Models
+      parameters:
+      - name: model_name
+        in: path
+        required: true
+        description: The name of the model
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Model status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelStatusResponse'
+        '404':
+          description: Model not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}/versions/{version}:
+    get:
+      operationId: getModelVersionStatus
+      summary: Get Model Version Status
+      description: Returns the status of a specific version of a model in the ModelServer.
+      tags:
+      - Models
+      parameters:
+      - name: model_name
+        in: path
+        required: true
+        description: The name of the model
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        description: The specific version number of the model
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Model version status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelStatusResponse'
+        '404':
+          description: Model or version not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}/labels/{label}:
+    get:
+      operationId: getModelLabelStatus
+      summary: Get Model Label Status
+      description: Returns the status of a model version identified by label in the ModelServer.
+      tags:
+      - Models
+      parameters:
+      - name: model_name
+        in: path
+        required: true
+        description: The name of the model
+        schema:
+          type: string
+      - name: label
+        in: path
+        required: true
+        description: The label identifying a specific model version
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Model label status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelStatusResponse'
+        '404':
+          description: Model or label not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}/metadata:
+    get:
+      operationId: getModelMetadata
+      summary: Get Model Metadata
+      description: Returns the metadata of a model in the ModelServer. If no version is specified, returns metadata for the latest available version.
+      tags:
+      - Models
+      parameters:
+      - name: model_name
+        in: path
+        required: true
+        description: The name of the model
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Model metadata retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelMetadataResponse'
+        '404':
+          description: Model not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}/versions/{version}/metadata:
+    get:
+      operationId: getModelVersionMetadata
+      summary: Get Model Version Metadata
+      description: Returns the metadata for a specific version of a model in the ModelServer.
+      tags:
+      - Models
+      parameters:
+      - name: model_name
+        in: path
+        required: true
+        description: The name of the model
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        description: The specific version number of the model
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Model version metadata retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelMetadataResponse'
+        '404':
+          description: Model or version not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ModelMetadataResponse:
+      type: object
+      description: Response containing metadata about a model
+      properties:
+        model_spec:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The model name
+            version:
+              type: integer
+              description: The model version
+        metadata:
+          type: object
+          description: Metadata map containing signature definitions
+          additionalProperties: true
+    ErrorResponse:
+      type: object
+      description: Error response returned when a request fails
+      properties:
+        error:
+          type: string
+          description: Human-readable error message describing what went wrong
+    ModelStatusResponse:
+      type: object
+      description: Response containing the status of a model or model version
+      properties:
+        model_version_status:
+          type: array
+          description: List of status entries for each model version
+          items:
+            type: object
+            properties:
+              version:
+                type: integer
+                description: The version number
+              state:
+                type: string
+                description: The current state of the model version
+                enum:
+                - UNKNOWN
+                - START
+                - LOADING
+                - AVAILABLE
+                - UNLOADING
+                - END
+              status:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    description: Error code if any
+                  error_message:
+                    type: string
+                    description: Error message if any
+externalDocs:
+  description: TensorFlow Serving REST API Documentation
+  url: https://www.tensorflow.org/tfx/serving/api_rest
