@@ -1,0 +1,587 @@
+openapi: 3.0.3
+info:
+  title: TensorFlow Serving REST API
+  description: >-
+    A flexible, high-performance serving system for machine learning models
+    designed for production environments. TensorFlow ModelServer supports REST
+    APIs for model status checks, metadata retrieval, classification, regression,
+    and prediction inference. All requests and responses use JSON format.
+  version: '2.0'
+  contact:
+    name: TensorFlow Team
+    url: https://www.tensorflow.org/
+  license:
+    name: Apache 2.0
+    url: https://github.com/tensorflow/serving/blob/master/LICENSE
+externalDocs:
+  description: TensorFlow Serving REST API Documentation
+  url: https://www.tensorflow.org/tfx/serving/api_rest
+servers:
+  - url: 'http://{host}:{port}'
+    description: TensorFlow ModelServer
+    variables:
+      host:
+        default: localhost
+        description: ModelServer hostname
+      port:
+        default: '8501'
+        description: REST API port (default 8501)
+tags:
+  - name: Models
+    description: Model status and metadata operations
+  - name: Inference
+    description: Model inference operations including classify, regress, and predict
+paths:
+  /v1/models/{model_name}:
+    get:
+      operationId: getModelStatus
+      summary: Get Model Status
+      description: >-
+        Returns the status of a model in the ModelServer, including the state
+        and any error status for each version of the model.
+      tags:
+        - Models
+      parameters:
+        - name: model_name
+          in: path
+          required: true
+          description: The name of the model
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Model status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelStatusResponse'
+        '404':
+          description: Model not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}/versions/{version}:
+    get:
+      operationId: getModelVersionStatus
+      summary: Get Model Version Status
+      description: >-
+        Returns the status of a specific version of a model in the ModelServer.
+      tags:
+        - Models
+      parameters:
+        - name: model_name
+          in: path
+          required: true
+          description: The name of the model
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version number of the model
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Model version status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelStatusResponse'
+        '404':
+          description: Model or version not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}/labels/{label}:
+    get:
+      operationId: getModelLabelStatus
+      summary: Get Model Label Status
+      description: >-
+        Returns the status of a model version identified by label in the
+        ModelServer.
+      tags:
+        - Models
+      parameters:
+        - name: model_name
+          in: path
+          required: true
+          description: The name of the model
+          schema:
+            type: string
+        - name: label
+          in: path
+          required: true
+          description: The label identifying a specific model version
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Model label status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelStatusResponse'
+        '404':
+          description: Model or label not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}/metadata:
+    get:
+      operationId: getModelMetadata
+      summary: Get Model Metadata
+      description: >-
+        Returns the metadata of a model in the ModelServer. If no version is
+        specified, returns metadata for the latest available version.
+      tags:
+        - Models
+      parameters:
+        - name: model_name
+          in: path
+          required: true
+          description: The name of the model
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Model metadata retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelMetadataResponse'
+        '404':
+          description: Model not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}/versions/{version}/metadata:
+    get:
+      operationId: getModelVersionMetadata
+      summary: Get Model Version Metadata
+      description: >-
+        Returns the metadata for a specific version of a model in the
+        ModelServer.
+      tags:
+        - Models
+      parameters:
+        - name: model_name
+          in: path
+          required: true
+          description: The name of the model
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version number of the model
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Model version metadata retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelMetadataResponse'
+        '404':
+          description: Model or version not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}:classify:
+    post:
+      operationId: classifyModel
+      summary: Classify With Model
+      description: >-
+        Runs classification inference using the specified model. The request
+        follows the PredictionService.Classify gRPC API semantics. Returns
+        classification labels and scores.
+      tags:
+        - Inference
+      parameters:
+        - name: model_name
+          in: path
+          required: true
+          description: The name of the model
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassifyRequest'
+      responses:
+        '200':
+          description: Classification completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassifyResponse'
+        '400':
+          description: Invalid request format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}/versions/{version}:classify:
+    post:
+      operationId: classifyModelVersion
+      summary: Classify With Model Version
+      description: >-
+        Runs classification inference using a specific version of the model.
+      tags:
+        - Inference
+      parameters:
+        - name: model_name
+          in: path
+          required: true
+          description: The name of the model
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version number of the model
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassifyRequest'
+      responses:
+        '200':
+          description: Classification completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassifyResponse'
+        '400':
+          description: Invalid request format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}:regress:
+    post:
+      operationId: regressModel
+      summary: Regress With Model
+      description: >-
+        Runs regression inference using the specified model. The request follows
+        the PredictionService.Regress gRPC API semantics. Returns regression
+        values for each input example.
+      tags:
+        - Inference
+      parameters:
+        - name: model_name
+          in: path
+          required: true
+          description: The name of the model
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegressRequest'
+      responses:
+        '200':
+          description: Regression completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegressResponse'
+        '400':
+          description: Invalid request format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}/versions/{version}:regress:
+    post:
+      operationId: regressModelVersion
+      summary: Regress With Model Version
+      description: >-
+        Runs regression inference using a specific version of the model.
+      tags:
+        - Inference
+      parameters:
+        - name: model_name
+          in: path
+          required: true
+          description: The name of the model
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version number of the model
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegressRequest'
+      responses:
+        '200':
+          description: Regression completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegressResponse'
+        '400':
+          description: Invalid request format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}:predict:
+    post:
+      operationId: predictModel
+      summary: Predict With Model
+      description: >-
+        Runs prediction inference using the specified model. Supports both row
+        format (instances array) and column format (inputs object). Returns
+        predictions in the corresponding format.
+      tags:
+        - Inference
+      parameters:
+        - name: model_name
+          in: path
+          required: true
+          description: The name of the model
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictRequest'
+      responses:
+        '200':
+          description: Prediction completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictResponse'
+        '400':
+          description: Invalid request format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/models/{model_name}/versions/{version}:predict:
+    post:
+      operationId: predictModelVersion
+      summary: Predict With Model Version
+      description: >-
+        Runs prediction inference using a specific version of the model.
+      tags:
+        - Inference
+      parameters:
+        - name: model_name
+          in: path
+          required: true
+          description: The name of the model
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version number of the model
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictRequest'
+      responses:
+        '200':
+          description: Prediction completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictResponse'
+        '400':
+          description: Invalid request format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ModelStatusResponse:
+      type: object
+      description: Response containing the status of a model or model version
+      properties:
+        model_version_status:
+          type: array
+          description: List of status entries for each model version
+          items:
+            type: object
+            properties:
+              version:
+                type: integer
+                description: The version number
+              state:
+                type: string
+                description: The current state of the model version
+                enum:
+                  - UNKNOWN
+                  - START
+                  - LOADING
+                  - AVAILABLE
+                  - UNLOADING
+                  - END
+              status:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    description: Error code if any
+                  error_message:
+                    type: string
+                    description: Error message if any
+    ModelMetadataResponse:
+      type: object
+      description: Response containing metadata about a model
+      properties:
+        model_spec:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The model name
+            version:
+              type: integer
+              description: The model version
+        metadata:
+          type: object
+          description: Metadata map containing signature definitions
+          additionalProperties: true
+    ClassifyRequest:
+      type: object
+      description: Request body for classification inference
+      properties:
+        signature_name:
+          type: string
+          description: Optional name of the signature to use
+        context:
+          type: object
+          description: Context features shared across all examples
+          additionalProperties: true
+        examples:
+          type: array
+          description: List of input examples for classification
+          items:
+            type: object
+            additionalProperties: true
+    ClassifyResponse:
+      type: object
+      description: Response from classification inference
+      properties:
+        result:
+          type: array
+          description: Classification results per example, each being a list of label-score pairs
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                oneOf:
+                  - type: string
+                  - type: number
+    RegressRequest:
+      type: object
+      description: Request body for regression inference
+      properties:
+        signature_name:
+          type: string
+          description: Optional name of the signature to use
+        context:
+          type: object
+          description: Context features shared across all examples
+          additionalProperties: true
+        examples:
+          type: array
+          description: List of input examples for regression
+          items:
+            type: object
+            additionalProperties: true
+    RegressResponse:
+      type: object
+      description: Response from regression inference
+      properties:
+        result:
+          type: array
+          description: Regression result values, one per input example
+          items:
+            type: number
+    PredictRequest:
+      type: object
+      description: >-
+        Request body for prediction inference. Supports row format (instances)
+        or column format (inputs).
+      properties:
+        signature_name:
+          type: string
+          description: Optional name of the signature to use
+        instances:
+          description: >-
+            Row format input - an array of individual prediction inputs. Each
+            element can be a scalar, list, or object with named inputs.
+          oneOf:
+            - type: array
+              items:
+                type: string
+            - type: array
+              items:
+                type: number
+            - type: array
+              items:
+                type: object
+                additionalProperties: true
+        inputs:
+          type: object
+          description: >-
+            Column format input - a map of input tensor names to arrays of
+            values for each input across all instances.
+          additionalProperties: true
+    PredictResponse:
+      type: object
+      description: >-
+        Response from prediction inference. Returns predictions in row format
+        or outputs in column format depending on the request.
+      properties:
+        predictions:
+          description: Row format predictions - one prediction per input instance
+          oneOf:
+            - type: array
+              items: {}
+            - type: number
+            - type: string
+        outputs:
+          type: object
+          description: Column format outputs - a map of output tensor names to value arrays
+          additionalProperties: true
+    ErrorResponse:
+      type: object
+      description: Error response returned when a request fails
+      properties:
+        error:
+          type: string
+          description: Human-readable error message describing what went wrong

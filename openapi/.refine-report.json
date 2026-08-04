@@ -1,0 +1,16 @@
+{
+  "provider": "tensorflow",
+  "sources": [
+    "tensorflow-inference-api-openapi.yml",
+    "tensorflow-models-api-openapi.yml"
+  ],
+  "outputs": [
+    "tensorflow-inference-api-openapi.yml",
+    "tensorflow-models-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
