@@ -2,45 +2,50 @@ generated: '2026-06-20'
 method: derived
 status: candidate
 source: openapi/tensorflow-serving-openapi.yml
-note: >-
-  No official hosted/remote MCP server is published for TensorFlow Serving. This is a candidate
-  tool list derived one-to-one from the TensorFlow Serving REST API operations, suitable for
-  wrapping a self-hosted ModelServer as an MCP server. TensorFlow Serving is deployed per-host,
-  so any real MCP server would target a specific ModelServer endpoint.
+note: No official hosted/remote MCP server is published for TensorFlow Serving. This is a candidate tool
+  list derived one-to-one from the TensorFlow Serving REST API operations, suitable for wrapping a self-hosted
+  ModelServer as an MCP server. TensorFlow Serving is deployed per-host, so any real MCP server would
+  target a specific ModelServer endpoint.
 server:
   name: tensorflow-serving
   transport: http
 tools:
-  - name: get_model_status
-    description: Get the status of a model in the ModelServer.
-    source_operation: openapi/tensorflow-serving-openapi.yml#getModelStatus
-  - name: get_model_version_status
-    description: Get the status of a specific model version.
-    source_operation: openapi/tensorflow-serving-openapi.yml#getModelVersionStatus
-  - name: get_model_label_status
-    description: Get the status of a model version identified by label.
-    source_operation: openapi/tensorflow-serving-openapi.yml#getModelLabelStatus
-  - name: get_model_metadata
-    description: Get the metadata (signature definitions) of a model.
-    source_operation: openapi/tensorflow-serving-openapi.yml#getModelMetadata
-  - name: get_model_version_metadata
-    description: Get the metadata for a specific model version.
-    source_operation: openapi/tensorflow-serving-openapi.yml#getModelVersionMetadata
-  - name: classify_model
-    description: Run classification inference using the specified model.
-    source_operation: openapi/tensorflow-serving-openapi.yml#classifyModel
-  - name: classify_model_version
-    description: Run classification inference using a specific model version.
-    source_operation: openapi/tensorflow-serving-openapi.yml#classifyModelVersion
-  - name: regress_model
-    description: Run regression inference using the specified model.
-    source_operation: openapi/tensorflow-serving-openapi.yml#regressModel
-  - name: regress_model_version
-    description: Run regression inference using a specific model version.
-    source_operation: openapi/tensorflow-serving-openapi.yml#regressModelVersion
-  - name: predict_model
-    description: Run prediction inference using the specified model.
-    source_operation: openapi/tensorflow-serving-openapi.yml#predictModel
-  - name: predict_model_version
-    description: Run prediction inference using a specific model version.
-    source_operation: openapi/tensorflow-serving-openapi.yml#predictModelVersion
+- name: get_model_status
+  description: Get the status of a model in the ModelServer.
+  source_operation: openapi/tensorflow-serving-openapi.yml#getModelStatus
+- name: get_model_version_status
+  description: Get the status of a specific model version.
+  source_operation: openapi/tensorflow-serving-openapi.yml#getModelVersionStatus
+- name: get_model_label_status
+  description: Get the status of a model version identified by label.
+  source_operation: openapi/tensorflow-serving-openapi.yml#getModelLabelStatus
+- name: get_model_metadata
+  description: Get the metadata (signature definitions) of a model.
+  source_operation: openapi/tensorflow-serving-openapi.yml#getModelMetadata
+- name: get_model_version_metadata
+  description: Get the metadata for a specific model version.
+  source_operation: openapi/tensorflow-serving-openapi.yml#getModelVersionMetadata
+- name: classify_model
+  description: Run classification inference using the specified model.
+  source_operation: openapi/tensorflow-serving-openapi.yml#classifyModel
+- name: classify_model_version
+  description: Run classification inference using a specific model version.
+  source_operation: openapi/tensorflow-serving-openapi.yml#classifyModelVersion
+- name: regress_model
+  description: Run regression inference using the specified model.
+  source_operation: openapi/tensorflow-serving-openapi.yml#regressModel
+- name: regress_model_version
+  description: Run regression inference using a specific model version.
+  source_operation: openapi/tensorflow-serving-openapi.yml#regressModelVersion
+- name: predict_model
+  description: Run prediction inference using the specified model.
+  source_operation: openapi/tensorflow-serving-openapi.yml#predictModel
+- name: predict_model_version
+  description: Run prediction inference using a specific model version.
+  source_operation: openapi/tensorflow-serving-openapi.yml#predictModelVersion
+deployment:
+  mode: none
+  verified: derived
+  tools: 11
+  checked: '2026-08-12'
+  source: catalog MCP census

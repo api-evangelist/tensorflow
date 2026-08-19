@@ -1,0 +1,1225 @@
+{
+  "item": [
+    {
+      "id": "33da77a3-6a2d-4668-a269-6cc672924677",
+      "name": "Inference",
+      "description": {
+        "content": "Model inference operations including classify, regress, and predict",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0580e967-8daa-40d9-9596-e7e2cad546e0",
+          "name": "Classify With Model",
+          "request": {
+            "name": "Classify With Model",
+            "description": {
+              "content": "Runs classification inference using the specified model. The request follows the PredictionService.Classify gRPC API semantics. Returns classification labels and scores.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                "{{model_name}}:classify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "ModelServer hostname",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                },
+                {
+                  "description": "REST API port (default 8501)",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": 522.2727884351175,\n    \"key_1\": false\n  },\n  \"examples\": [\n    {\n      \"key_0\": false,\n      \"key_1\": 3536,\n      \"key_2\": 1257.6516123574088\n    },\n    {\n      \"key_0\": true,\n      \"key_1\": true,\n      \"key_2\": 277.678314123162,\n      \"key_3\": 6202.9351277089\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dffab7f5-8de4-48d5-845e-2111a7109baa",
+              "name": "Classification completed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    "{{model_name}}:classify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": true,\n    \"key_1\": 8704,\n    \"key_2\": \"string\"\n  },\n  \"examples\": [\n    {\n      \"key_0\": \"string\"\n    },\n    {\n      \"key_0\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    [\n      [\n        \"string\",\n        \"string\"\n      ],\n      [\n        \"string\",\n        \"string\"\n      ]\n    ],\n    [\n      [\n        \"string\",\n        \"string\"\n      ],\n      [\n        \"string\",\n        \"string\"\n      ]\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c115d804-3fba-4502-8656-44c3a491b4e8",
+              "name": "Invalid request format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    "{{model_name}}:classify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": true,\n    \"key_1\": 8704,\n    \"key_2\": \"string\"\n  },\n  \"examples\": [\n    {\n      \"key_0\": \"string\"\n    },\n    {\n      \"key_0\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40688b82-3308-4f1e-a41e-a6cd01b38597",
+          "name": "Classify With Model Version",
+          "request": {
+            "name": "Classify With Model Version",
+            "description": {
+              "content": "Runs classification inference using a specific version of the model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                ":model_name",
+                "versions",
+                "{{version}}:classify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_name",
+                  "description": "(Required) The name of the model"
+                },
+                {
+                  "description": "ModelServer hostname",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                },
+                {
+                  "description": "REST API port (default 8501)",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": 93\n  },\n  \"examples\": [\n    {\n      \"key_0\": 2911.3010949079467,\n      \"key_1\": \"string\"\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": true\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "99f44c99-917b-4fe9-bc32-bf53aae4624e",
+              "name": "Classification completed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "versions",
+                    "{{version}}:classify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": true,\n    \"key_1\": 8704,\n    \"key_2\": \"string\"\n  },\n  \"examples\": [\n    {\n      \"key_0\": \"string\"\n    },\n    {\n      \"key_0\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    [\n      [\n        \"string\",\n        \"string\"\n      ],\n      [\n        \"string\",\n        \"string\"\n      ]\n    ],\n    [\n      [\n        \"string\",\n        \"string\"\n      ],\n      [\n        \"string\",\n        \"string\"\n      ]\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d619f02e-963b-4563-ac18-c83980743b0b",
+              "name": "Invalid request format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "versions",
+                    "{{version}}:classify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": true,\n    \"key_1\": 8704,\n    \"key_2\": \"string\"\n  },\n  \"examples\": [\n    {\n      \"key_0\": \"string\"\n    },\n    {\n      \"key_0\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ffdcc37-62e7-412b-88fa-7d2233b5dd4a",
+          "name": "Regress With Model",
+          "request": {
+            "name": "Regress With Model",
+            "description": {
+              "content": "Runs regression inference using the specified model. The request follows the PredictionService.Regress gRPC API semantics. Returns regression values for each input example.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                "{{model_name}}:regress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "ModelServer hostname",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                },
+                {
+                  "description": "REST API port (default 8501)",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": 3130,\n    \"key_1\": true\n  },\n  \"examples\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": false\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": 4683,\n      \"key_3\": true\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c4d4e07a-22f3-4c04-b8ee-e6bf8026b1e4",
+              "name": "Regression completed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    "{{model_name}}:regress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": 2383.1997365567568,\n    \"key_1\": false,\n    \"key_2\": 8446\n  },\n  \"examples\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 5404.6127446962255\n    },\n    {\n      \"key_0\": 7949.731305922513\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    8264.40458106134,\n    6102.534609410296\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e3f167d-7da6-4ee1-af40-9776854d521c",
+              "name": "Invalid request format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    "{{model_name}}:regress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": 2383.1997365567568,\n    \"key_1\": false,\n    \"key_2\": 8446\n  },\n  \"examples\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 5404.6127446962255\n    },\n    {\n      \"key_0\": 7949.731305922513\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29286109-5c15-41f6-a945-bc15061c597b",
+          "name": "Regress With Model Version",
+          "request": {
+            "name": "Regress With Model Version",
+            "description": {
+              "content": "Runs regression inference using a specific version of the model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                ":model_name",
+                "versions",
+                "{{version}}:regress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_name",
+                  "description": "(Required) The name of the model"
+                },
+                {
+                  "description": "ModelServer hostname",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                },
+                {
+                  "description": "REST API port (default 8501)",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": false\n  },\n  \"examples\": [\n    {\n      \"key_0\": 1465,\n      \"key_1\": \"string\"\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 5385.148223139376,\n      \"key_2\": false\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f0561330-1009-4a40-bcc5-ac9c11d9280e",
+              "name": "Regression completed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "versions",
+                    "{{version}}:regress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": 2383.1997365567568,\n    \"key_1\": false,\n    \"key_2\": 8446\n  },\n  \"examples\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 5404.6127446962255\n    },\n    {\n      \"key_0\": 7949.731305922513\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    8560.723291641236,\n    5012.575097566171\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df962b1b-0be6-437d-b21f-973846721de3",
+              "name": "Invalid request format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "versions",
+                    "{{version}}:regress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"context\": {\n    \"key_0\": 2383.1997365567568,\n    \"key_1\": false,\n    \"key_2\": 8446\n  },\n  \"examples\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 5404.6127446962255\n    },\n    {\n      \"key_0\": 7949.731305922513\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa818cf1-751d-4ec6-add3-9114c821dab2",
+          "name": "Predict With Model",
+          "request": {
+            "name": "Predict With Model",
+            "description": {
+              "content": "Runs prediction inference using the specified model. Supports both row format (instances array) and column format (inputs object). Returns predictions in the corresponding format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                "{{model_name}}:predict"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "ModelServer hostname",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                },
+                {
+                  "description": "REST API port (default 8501)",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature_name\": \"<string>\",\n  \"instances\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputs\": {\n    \"key_0\": 1223.1093637661238\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "818e147c-b4cb-4285-be7e-7de3877f2524",
+              "name": "Prediction completed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    "{{model_name}}:predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"instances\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputs\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"outputs\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cabed97-1d76-4f5a-b85b-0bf55b130994",
+              "name": "Invalid request format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    "{{model_name}}:predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"instances\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputs\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf4d700e-7233-45c5-8c1b-49c1540d0921",
+          "name": "Predict With Model Version",
+          "request": {
+            "name": "Predict With Model Version",
+            "description": {
+              "content": "Runs prediction inference using a specific version of the model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                ":model_name",
+                "versions",
+                "{{version}}:predict"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_name",
+                  "description": "(Required) The name of the model"
+                },
+                {
+                  "description": "ModelServer hostname",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                },
+                {
+                  "description": "REST API port (default 8501)",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature_name\": \"<string>\",\n  \"instances\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputs\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f32a2869-199f-44e1-b88a-1d85d0a05843",
+              "name": "Prediction completed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "versions",
+                    "{{version}}:predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"instances\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputs\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"outputs\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba50f3e1-7bdf-49a5-8f41-a941f7d2b9d1",
+              "name": "Invalid request format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "versions",
+                    "{{version}}:predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature_name\": \"<string>\",\n  \"instances\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputs\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "ModelServer hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "description": {
+        "content": "REST API port (default 8501)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "8501",
+      "key": "port"
+    },
+    {
+      "type": "string",
+      "value": "http://{{host}}:{{port}}",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The name of the model",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "model_name"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The specific version number of the model",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "version"
+    }
+  ],
+  "info": {
+    "_postman_id": "3fd2b2b6-1bea-4b6c-b4d2-9f0ac49ad453",
+    "name": "TensorFlow Serving REST Inference API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A flexible, high-performance serving system for machine learning models designed for production environments. TensorFlow ModelServer supports REST APIs for model status checks, metadata retrieval, classification, regression, and prediction inference. All requests and responses use JSON format.\n\nContact Support:\n Name: TensorFlow Team",
+      "type": "text/plain"
+    }
+  }
+}

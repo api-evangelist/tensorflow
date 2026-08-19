@@ -1,0 +1,992 @@
+{
+  "item": [
+    {
+      "id": "a779cdaa-67d4-4e69-9d1f-13a46ebda512",
+      "name": "Models",
+      "description": {
+        "content": "Model status and metadata operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "148b1a35-17b0-4ede-83c6-330b6a88a84e",
+          "name": "Get Model Status",
+          "request": {
+            "name": "Get Model Status",
+            "description": {
+              "content": "Returns the status of a model in the ModelServer, including the state and any error status for each version of the model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                ":model_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_name",
+                  "description": "(Required) The name of the model"
+                },
+                {
+                  "description": "ModelServer hostname",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                },
+                {
+                  "description": "REST API port (default 8501)",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dad7632e-1a85-414c-97b5-2a585ff84aaa",
+              "name": "Model status retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"model_version_status\": [\n    {\n      \"version\": 1243,\n      \"state\": \"UNKNOWN\",\n      \"status\": {\n        \"error_code\": \"string\",\n        \"error_message\": \"string\"\n      }\n    },\n    {\n      \"version\": 7153,\n      \"state\": \"LOADING\",\n      \"status\": {\n        \"error_code\": \"string\",\n        \"error_message\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6033a79d-76dc-4281-bd32-3bc4f5de091f",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70a973b3-71d9-4af4-a54f-5394874ad678",
+          "name": "Get Model Version Status",
+          "request": {
+            "name": "Get Model Version Status",
+            "description": {
+              "content": "Returns the status of a specific version of a model in the ModelServer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                ":model_name",
+                "versions",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_name",
+                  "description": "(Required) The name of the model"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "version",
+                  "description": "(Required) The specific version number of the model"
+                },
+                {
+                  "description": "ModelServer hostname",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                },
+                {
+                  "description": "REST API port (default 8501)",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b46b38be-d07c-4ab4-9557-e8913d7237df",
+              "name": "Model version status retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "versions",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "version",
+                      "description": "(Required) The specific version number of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"model_version_status\": [\n    {\n      \"version\": 3910,\n      \"state\": \"AVAILABLE\",\n      \"status\": {\n        \"error_code\": \"string\",\n        \"error_message\": \"string\"\n      }\n    },\n    {\n      \"version\": 8678,\n      \"state\": \"UNKNOWN\",\n      \"status\": {\n        \"error_code\": \"string\",\n        \"error_message\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cf09a83-750a-487f-be57-6e5ec95cb122",
+              "name": "Model or version not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "versions",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "version",
+                      "description": "(Required) The specific version number of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03b79c44-81a1-4057-a7fa-4e8b50ca0721",
+          "name": "Get Model Label Status",
+          "request": {
+            "name": "Get Model Label Status",
+            "description": {
+              "content": "Returns the status of a model version identified by label in the ModelServer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                ":model_name",
+                "labels",
+                ":label"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_name",
+                  "description": "(Required) The name of the model"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "label",
+                  "description": "(Required) The label identifying a specific model version"
+                },
+                {
+                  "description": "ModelServer hostname",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                },
+                {
+                  "description": "REST API port (default 8501)",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec485cbc-7d3a-45fa-a262-723905603d43",
+              "name": "Model label status retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "labels",
+                    ":label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "label",
+                      "description": "(Required) The label identifying a specific model version"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"model_version_status\": [\n    {\n      \"version\": 3910,\n      \"state\": \"AVAILABLE\",\n      \"status\": {\n        \"error_code\": \"string\",\n        \"error_message\": \"string\"\n      }\n    },\n    {\n      \"version\": 8678,\n      \"state\": \"UNKNOWN\",\n      \"status\": {\n        \"error_code\": \"string\",\n        \"error_message\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93ed7c98-26c3-4404-ab4f-93be18d0918a",
+              "name": "Model or label not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "labels",
+                    ":label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "label",
+                      "description": "(Required) The label identifying a specific model version"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92e69a63-c436-4b24-9fda-13cceece1fa6",
+          "name": "Get Model Metadata",
+          "request": {
+            "name": "Get Model Metadata",
+            "description": {
+              "content": "Returns the metadata of a model in the ModelServer. If no version is specified, returns metadata for the latest available version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                ":model_name",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_name",
+                  "description": "(Required) The name of the model"
+                },
+                {
+                  "description": "ModelServer hostname",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                },
+                {
+                  "description": "REST API port (default 8501)",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e46fd79e-fe59-4e61-a05a-29eac7cff020",
+              "name": "Model metadata retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"model_spec\": {\n    \"name\": \"string\",\n    \"version\": 6441\n  },\n  \"metadata\": {\n    \"key_0\": 5540.755280407159,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de64b4e8-8f6d-47ff-95d2-454dbfcd10bd",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3804ba57-2d43-439c-be95-fe3c7b4ab863",
+          "name": "Get Model Version Metadata",
+          "request": {
+            "name": "Get Model Version Metadata",
+            "description": {
+              "content": "Returns the metadata for a specific version of a model in the ModelServer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "models",
+                ":model_name",
+                "versions",
+                ":version",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model_name",
+                  "description": "(Required) The name of the model"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "version",
+                  "description": "(Required) The specific version number of the model"
+                },
+                {
+                  "description": "ModelServer hostname",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                },
+                {
+                  "description": "REST API port (default 8501)",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9fe7dbaf-7b37-4b5c-94f5-2b37adaa42e3",
+              "name": "Model version metadata retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "versions",
+                    ":version",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "version",
+                      "description": "(Required) The specific version number of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"model_spec\": {\n    \"name\": \"string\",\n    \"version\": 6441\n  },\n  \"metadata\": {\n    \"key_0\": 5540.755280407159,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13231062-2381-49e3-9226-f062a595f8d3",
+              "name": "Model or version not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "models",
+                    ":model_name",
+                    "versions",
+                    ":version",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model_name",
+                      "description": "(Required) The name of the model"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "version",
+                      "description": "(Required) The specific version number of the model"
+                    },
+                    {
+                      "description": "ModelServer hostname",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    },
+                    {
+                      "description": "REST API port (default 8501)",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "ModelServer hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "description": {
+        "content": "REST API port (default 8501)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "8501",
+      "key": "port"
+    },
+    {
+      "type": "string",
+      "value": "http://{{host}}:{{port}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2981712a-031d-42ec-a4b9-444882869f64",
+    "name": "TensorFlow Serving REST Inference Models API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A flexible, high-performance serving system for machine learning models designed for production environments. TensorFlow ModelServer supports REST APIs for model status checks, metadata retrieval, classification, regression, and prediction inference. All requests and responses use JSON format.\n\nContact Support:\n Name: TensorFlow Team",
+      "type": "text/plain"
+    }
+  }
+}

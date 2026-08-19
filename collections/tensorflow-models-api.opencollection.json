@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TensorFlow Serving REST Inference Models API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Model Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:{port}/v1/models/:model_name",
+            "params": [
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the model"
+              }
+            ]
+          },
+          "docs": "Returns the status of a model in the ModelServer, including the state and any error status for each version of the model."
+        },
+        {
+          "info": {
+            "name": "Get Model Version Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:{port}/v1/models/:model_name/versions/:version",
+            "params": [
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the model"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The specific version number of the model"
+              }
+            ]
+          },
+          "docs": "Returns the status of a specific version of a model in the ModelServer."
+        },
+        {
+          "info": {
+            "name": "Get Model Label Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:{port}/v1/models/:model_name/labels/:label",
+            "params": [
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the model"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "path",
+                "description": "The label identifying a specific model version"
+              }
+            ]
+          },
+          "docs": "Returns the status of a model version identified by label in the ModelServer."
+        },
+        {
+          "info": {
+            "name": "Get Model Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:{port}/v1/models/:model_name/metadata",
+            "params": [
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the model"
+              }
+            ]
+          },
+          "docs": "Returns the metadata of a model in the ModelServer. If no version is specified, returns metadata for the latest available version."
+        },
+        {
+          "info": {
+            "name": "Get Model Version Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:{port}/v1/models/:model_name/versions/:version/metadata",
+            "params": [
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the model"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The specific version number of the model"
+              }
+            ]
+          },
+          "docs": "Returns the metadata for a specific version of a model in the ModelServer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

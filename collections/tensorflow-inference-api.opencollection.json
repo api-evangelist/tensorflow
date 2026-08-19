@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TensorFlow Serving REST Inference API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inference",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Classify With Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:{port}/v1/models/:model_name:classify",
+            "params": [
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the model"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs classification inference using the specified model. The request follows the PredictionService.Classify gRPC API semantics. Returns classification labels and scores."
+        },
+        {
+          "info": {
+            "name": "Classify With Model Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:{port}/v1/models/:model_name/versions/:version:classify",
+            "params": [
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the model"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The specific version number of the model"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs classification inference using a specific version of the model."
+        },
+        {
+          "info": {
+            "name": "Regress With Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:{port}/v1/models/:model_name:regress",
+            "params": [
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the model"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs regression inference using the specified model. The request follows the PredictionService.Regress gRPC API semantics. Returns regression values for each input example."
+        },
+        {
+          "info": {
+            "name": "Regress With Model Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:{port}/v1/models/:model_name/versions/:version:regress",
+            "params": [
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the model"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The specific version number of the model"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs regression inference using a specific version of the model."
+        },
+        {
+          "info": {
+            "name": "Predict With Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:{port}/v1/models/:model_name:predict",
+            "params": [
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the model"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs prediction inference using the specified model. Supports both row format (instances array) and column format (inputs object). Returns predictions in the corresponding format."
+        },
+        {
+          "info": {
+            "name": "Predict With Model Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:{port}/v1/models/:model_name/versions/:version:predict",
+            "params": [
+              {
+                "name": "model_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the model"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The specific version number of the model"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs prediction inference using a specific version of the model."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
