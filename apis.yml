@@ -21,6 +21,15 @@ accessModel:
   method: derived
 image: https://www.tensorflow.org/images/tf_logo_social.png
 tags:
+  - Artificial Intelligence
+  - Deep Learning
+  - JavaScript
+  - Machine-Learning
+  - Model Serving
+  - Neural Networks
+  - Open-Source
+  - Python
+tags_raw:
   - AI
   - Deep Learning
   - JavaScript
@@ -41,6 +50,10 @@ apis:
   humanURL: https://www.tensorflow.org/api_docs/python/tf
   baseURL: https://www.tensorflow.org/api_docs
   tags:
+  - Core API
+  - Machine-Learning
+  - Python
+  tags_raw:
   - Core API
   - Machine Learning
   - Python
