@@ -15,8 +15,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: tensorflowServingApi
-  url: ../openapi/tensorflow-serving-openapi.yml
+- name: inferenceApi
+  url: ../openapi/tensorflow-inference-api-openapi.yml
+  type: openapi
+- name: modelsApi
+  url: ../openapi/tensorflow-models-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: version-canary-compare
