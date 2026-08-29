@@ -6,6 +6,17 @@ description: >-
   model training, serving, mobile/edge deployment, and a hub of pre-trained models. TensorFlow Serving exposes REST and
   gRPC APIs for production model inference.
 type: Index
+deliveryModel:
+  model: library
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Library · distributed through package registries, no callable service
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: open
