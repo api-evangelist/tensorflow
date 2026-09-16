@@ -1,10 +1,9 @@
 aid: tensorflow
 name: TensorFlow
-description: >-
-  TensorFlow is an end-to-end open source machine learning platform developed by Google. It provides a comprehensive
-  ecosystem of tools, libraries, and community resources for building and deploying ML-powered applications, including
-  model training, serving, mobile/edge deployment, and a hub of pre-trained models. TensorFlow Serving exposes REST and
-  gRPC APIs for production model inference.
+description: TensorFlow is an end-to-end open source machine learning platform developed by Google. It
+  provides a comprehensive ecosystem of tools, libraries, and community resources for building and deploying
+  ML-powered applications, including model training, serving, mobile/edge deployment, and a hub of pre-trained
+  models. TensorFlow Serving exposes REST and gRPC APIs for production model inference.
 type: Index
 deliveryModel:
   model: library
@@ -32,32 +31,32 @@ accessModel:
   method: derived
 image: https://www.tensorflow.org/images/tf_logo_social.png
 tags:
-  - Artificial Intelligence
-  - Deep Learning
-  - JavaScript
-  - Machine-Learning
-  - Model Serving
-  - Neural Networks
-  - Open-Source
-  - Python
+- Artificial Intelligence
+- Deep Learning
+- JavaScript
+- Machine-Learning
+- Model Serving
+- Neural Networks
+- Open-Source
+- Python
 tags_raw:
-  - AI
-  - Deep Learning
-  - JavaScript
-  - Machine Learning
-  - Model Serving
-  - Neural Networks
-  - Open Source
-  - Python
+- AI
+- Deep Learning
+- JavaScript
+- Machine Learning
+- Model Serving
+- Neural Networks
+- Open Source
+- Python
 url: https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/apis.yml
 created: '2024-01-15'
-modified: '2026-06-20'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: tensorflow:tensorflow-core
   name: TensorFlow Core API
-  description: >-
-    The foundational Python and C++ API for building and training machine learning models using TensorFlow.
+  description: The foundational Python and C++ API for building and training machine learning models using
+    TensorFlow.
   humanURL: https://www.tensorflow.org/api_docs/python/tf
   baseURL: https://www.tensorflow.org/api_docs
   tags:
@@ -97,9 +96,8 @@ apis:
     url: https://www.npmjs.com/package/@tensorflow/tfjs
 - aid: tensorflow:tensorflow-lite
   name: TensorFlow Lite API
-  description: >-
-    Lightweight solution for ML inference on mobile and embedded devices, optimized for on-device model
-    execution.
+  description: Lightweight solution for ML inference on mobile and embedded devices, optimized for on-device
+    model execution.
   humanURL: https://www.tensorflow.org/lite
   baseURL: https://www.tensorflow.org/lite/api_docs
   tags:
@@ -118,9 +116,8 @@ apis:
     url: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite
 - aid: tensorflow:tensorflow-hub
   name: TensorFlow Hub API
-  description: >-
-    A library and repository of reusable pre-trained machine learning modules, enabling transfer learning
-    across text, image, video, and audio domains.
+  description: A library and repository of reusable pre-trained machine learning modules, enabling transfer
+    learning across text, image, video, and audio domains.
   humanURL: https://tfhub.dev/
   baseURL: https://tfhub.dev/
   tags:
@@ -136,9 +133,8 @@ apis:
     url: https://github.com/tensorflow/hub
 - aid: tensorflow:tensorboard
   name: TensorBoard API
-  description: >-
-    TensorFlow's visualization toolkit for experiment tracking, model debugging, and performance profiling
-    via an embedded web server with REST endpoints.
+  description: TensorFlow's visualization toolkit for experiment tracking, model debugging, and performance
+    profiling via an embedded web server with REST endpoints.
   humanURL: https://www.tensorflow.org/tensorboard
   tags:
   - Model Debugging
@@ -178,86 +174,91 @@ apis:
   - type: GitHub
     url: https://github.com/tensorflow/serving
 maintainers:
-  - FN: Google Brain Team
-    email: tensorflow@googlegroups.com
-    url: https://www.tensorflow.org/
+- FN: Google Brain Team
+  email: tensorflow@googlegroups.com
+  url: https://www.tensorflow.org/
 include:
-  - name: TensorFlow Community
-    url: https://www.tensorflow.org/community
+- name: TensorFlow Community
+  url: https://www.tensorflow.org/community
 common:
-  - type: AgenticAccess
-    url: agentic-access/tensorflow-agentic-access.yml
-  - type: DomainSecurity
-    url: security/tensorflow-domain-security.yml
-  - type: Packages
-    url: packages/tensorflow-packages.yml
-  - type: X-MCPServerCandidate
-    url: mcp/tensorflow-mcp.yml
-    note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
-  - type: LLMsTxt
-    url: llms/tensorflow-llms.txt
-  - type: Overlay
-    url: overlays/tensorflow-serving-overlay.yaml
-  - type: Protobuf
-    url: grpc/tensorflow-prediction-service.proto
-  - type: Protobuf
-    url: grpc/tensorflow-model-service.proto
-  - type: Conformance
-    url: conformance/tensorflow-conformance.yml
-  - type: ErrorCatalog
-    url: errors/tensorflow-problem-types.yml
-  - type: Lifecycle
-    url: lifecycle/tensorflow-lifecycle.yml
-  - type: Authentication
-    url: authentication/tensorflow-authentication.yml
-  - type: Sandbox
-    url: sandbox/tensorflow-sandbox.yml
-  - type: Conventions
-    url: conventions/tensorflow-conventions.yml
-  - type: ChangeLog
-    url: changelog/tensorflow-changelog.yml
-  - type: CLI
-    url: cli/tensorflow-cli.yml
-  - type: DataModel
-    url: data-model/tensorflow-data-model.yml
-  - type: Arazzo
-    url: arazzo/tensorflow-predict-preflight-workflow.yml
-    name: TensorFlow Preflight a Model and Run Prediction
-  - type: Arazzo
-    url: arazzo/tensorflow-classify-preflight-workflow.yml
-    name: TensorFlow Preflight a Model and Run Classification
-  - type: Arazzo
-    url: arazzo/tensorflow-regress-preflight-workflow.yml
-    name: TensorFlow Preflight a Model and Run Regression
-  - type: Arazzo
-    url: arazzo/tensorflow-version-canary-compare-workflow.yml
-    name: TensorFlow Compare a Candidate Version Against the Default
-  - type: Arazzo
-    url: arazzo/tensorflow-label-routed-inference-workflow.yml
-    name: TensorFlow Route Inference by Version Label
-  - type: Arazzo
-    url: arazzo/tensorflow-pinned-example-scoring-workflow.yml
-    name: TensorFlow Pinned Reproducible Example Scoring
-  - type: Arazzo
-    url: arazzo/tensorflow-rollout-readiness-workflow.yml
-    name: TensorFlow Gate a Rollout on Version Readiness
-  - type: LinkedIn
-    url: https://www.linkedin.com/showcase/tensorflowdev
-  - type: Blog
-    url: https://blog.tensorflow.org/
-  - type: GitHubOrg
-    url: https://github.com/tensorflow
-  - type: Twitter
-    url: https://twitter.com/tensorflow
-  - type: YouTube
-    url: https://www.youtube.com/tensorflow
-  - type: License
-    url: https://github.com/tensorflow/tensorflow/blob/master/LICENSE
-  - type: Forums
-    url: https://discuss.tensorflow.org/
-  - type: StackOverflow
-    url: https://stackoverflow.com/questions/tagged/tensorflow
-  - type: OpenAPI
-    url: https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/openapi/tensorflow-serving-openapi.yml
-  - type: Vocabulary
-    url: https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/vocabulary/tensorflow-vocabulary.yml
+- type: Website
+  url: https://tensorflow.org
+- type: AgenticAccess
+  url: agentic-access/tensorflow-agentic-access.yml
+- type: DomainSecurity
+  url: security/tensorflow-domain-security.yml
+- type: Packages
+  url: packages/tensorflow-packages.yml
+- type: X-MCPServerCandidate
+  url: mcp/tensorflow-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
+- type: LLMsTxt
+  url: llms/tensorflow-llms.txt
+- type: Overlay
+  url: overlays/tensorflow-serving-overlay.yaml
+- type: Protobuf
+  url: grpc/tensorflow-prediction-service.proto
+- type: Protobuf
+  url: grpc/tensorflow-model-service.proto
+- type: Conformance
+  url: conformance/tensorflow-conformance.yml
+- type: ErrorCatalog
+  url: errors/tensorflow-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/tensorflow-lifecycle.yml
+- type: Authentication
+  url: authentication/tensorflow-authentication.yml
+- type: Sandbox
+  url: sandbox/tensorflow-sandbox.yml
+- type: Conventions
+  url: conventions/tensorflow-conventions.yml
+- type: ChangeLog
+  url: changelog/tensorflow-changelog.yml
+- type: CLI
+  url: cli/tensorflow-cli.yml
+- type: DataModel
+  url: data-model/tensorflow-data-model.yml
+- type: Arazzo
+  url: arazzo/tensorflow-predict-preflight-workflow.yml
+  name: TensorFlow Preflight a Model and Run Prediction
+- type: Arazzo
+  url: arazzo/tensorflow-classify-preflight-workflow.yml
+  name: TensorFlow Preflight a Model and Run Classification
+- type: Arazzo
+  url: arazzo/tensorflow-regress-preflight-workflow.yml
+  name: TensorFlow Preflight a Model and Run Regression
+- type: Arazzo
+  url: arazzo/tensorflow-version-canary-compare-workflow.yml
+  name: TensorFlow Compare a Candidate Version Against the Default
+- type: Arazzo
+  url: arazzo/tensorflow-label-routed-inference-workflow.yml
+  name: TensorFlow Route Inference by Version Label
+- type: Arazzo
+  url: arazzo/tensorflow-pinned-example-scoring-workflow.yml
+  name: TensorFlow Pinned Reproducible Example Scoring
+- type: Arazzo
+  url: arazzo/tensorflow-rollout-readiness-workflow.yml
+  name: TensorFlow Gate a Rollout on Version Readiness
+- type: LinkedIn
+  url: https://www.linkedin.com/showcase/tensorflowdev
+- type: Blog
+  url: https://blog.tensorflow.org/
+- type: GitHubOrg
+  url: https://github.com/tensorflow
+- type: Twitter
+  url: https://twitter.com/tensorflow
+- type: YouTube
+  url: https://www.youtube.com/tensorflow
+- type: License
+  url: https://github.com/tensorflow/tensorflow/blob/master/LICENSE
+- type: Forums
+  url: https://discuss.tensorflow.org/
+- type: StackOverflow
+  url: https://stackoverflow.com/questions/tagged/tensorflow
+- type: OpenAPI
+  url: https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/openapi/tensorflow-serving-openapi.yml
+- type: Vocabulary
+  url: https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/vocabulary/tensorflow-vocabulary.yml
