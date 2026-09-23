@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: TensorFlow Serving REST Inference API
   description: A flexible, high-performance serving system for machine learning models designed for production environments. TensorFlow ModelServer supports REST APIs for model status checks, metadata retrieval, classification, regression, and prediction inference. All requests and responses use JSON format.
@@ -241,6 +241,23 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ClassifyRequest:
+      type: object
+      description: Request body for classification inference
+      properties:
+        signature_name:
+          type: string
+          description: Optional name of the signature to use
+        context:
+          type: object
+          description: Context features shared across all examples
+          additionalProperties: true
+        examples:
+          type: array
+          description: List of input examples for classification
+          items:
+            type: object
+            additionalProperties: true
     PredictRequest:
       type: object
       description: Request body for prediction inference. Supports row format (instances) or column format (inputs).
@@ -265,54 +282,6 @@ components:
           type: object
           description: Column format input - a map of input tensor names to arrays of values for each input across all instances.
           additionalProperties: true
-    RegressResponse:
-      type: object
-      description: Response from regression inference
-      properties:
-        result:
-          type: array
-          description: Regression result values, one per input example
-          items:
-            type: number
-    ErrorResponse:
-      type: object
-      description: Error response returned when a request fails
-      properties:
-        error:
-          type: string
-          description: Human-readable error message describing what went wrong
-    ClassifyRequest:
-      type: object
-      description: Request body for classification inference
-      properties:
-        signature_name:
-          type: string
-          description: Optional name of the signature to use
-        context:
-          type: object
-          description: Context features shared across all examples
-          additionalProperties: true
-        examples:
-          type: array
-          description: List of input examples for classification
-          items:
-            type: object
-            additionalProperties: true
-    ClassifyResponse:
-      type: object
-      description: Response from classification inference
-      properties:
-        result:
-          type: array
-          description: Classification results per example, each being a list of label-score pairs
-          items:
-            type: array
-            items:
-              type: array
-              items:
-                oneOf:
-                - type: string
-                - type: number
     RegressRequest:
       type: object
       description: Request body for regression inference
@@ -330,6 +299,22 @@ components:
           items:
             type: object
             additionalProperties: true
+    ErrorResponse:
+      type: object
+      description: Error response returned when a request fails
+      properties:
+        error:
+          type: string
+          description: Human-readable error message describing what went wrong
+    RegressResponse:
+      type: object
+      description: Response from regression inference
+      properties:
+        result:
+          type: array
+          description: Regression result values, one per input example
+          items:
+            type: number
     PredictResponse:
       type: object
       description: Response from prediction inference. Returns predictions in row format or outputs in column format depending on the request.
@@ -345,6 +330,21 @@ components:
           type: object
           description: Column format outputs - a map of output tensor names to value arrays
           additionalProperties: true
+    ClassifyResponse:
+      type: object
+      description: Response from classification inference
+      properties:
+        result:
+          type: array
+          description: Classification results per example, each being a list of label-score pairs
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                - type: number
 externalDocs:
   description: TensorFlow Serving REST API Documentation
   url: https://www.tensorflow.org/tfx/serving/api_rest
