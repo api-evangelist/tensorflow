@@ -6,15 +6,21 @@ description: TensorFlow is an end-to-end open source machine learning platform d
   models. TensorFlow Serving exposes REST and gRPC APIs for production model inference.
 type: Index
 deliveryModel:
-  model: library
-  open_source: false
+  model: self-hosted
+  license: Apache-2.0
+  license_evidence:
+    repo: tensorflow/tensorflow
+    spdx: Apache-2.0
+    stars: 200306
+  open_source: true
   commercial: false
   callable_host: false
-  label: Library · distributed through package registries, no callable service
-  confidence: low
+  label: Self-hosted open source · you run it yourself
+  confidence: medium
   source:
   - openapi
-  generated: '2026-08-28'
+  - repository-license
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: free
@@ -34,10 +40,10 @@ tags:
 - Artificial Intelligence
 - Deep Learning
 - JavaScript
-- Machine-Learning
+- Machine Learning
 - Model Serving
 - Neural Networks
-- Open-Source
+- Open Source
 - Python
 tags_raw:
 - AI
@@ -48,6 +54,8 @@ tags_raw:
 - Neural Networks
 - Open Source
 - Python
+- Machine-Learning
+- Open-Source
 url: https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/apis.yml
 created: '2024-01-15'
 modified: '2026-09-16'
@@ -61,12 +69,13 @@ apis:
   baseURL: https://www.tensorflow.org/api_docs
   tags:
   - Core API
-  - Machine-Learning
+  - Machine Learning
   - Python
   tags_raw:
   - Core API
   - Machine Learning
   - Python
+  - Machine-Learning
   properties:
   - type: Documentation
     url: https://www.tensorflow.org/api_docs/python/tf

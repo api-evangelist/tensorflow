@@ -178,6 +178,13 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response returned when a request fails
+      properties:
+        error:
+          type: string
+          description: Human-readable error message describing what went wrong
     ModelMetadataResponse:
       type: object
       description: Response containing metadata about a model
@@ -227,13 +234,6 @@ components:
                   error_message:
                     type: string
                     description: Error message if any
-    ErrorResponse:
-      type: object
-      description: Error response returned when a request fails
-      properties:
-        error:
-          type: string
-          description: Human-readable error message describing what went wrong
 externalDocs:
   description: TensorFlow Serving REST API Documentation
   url: https://www.tensorflow.org/tfx/serving/api_rest

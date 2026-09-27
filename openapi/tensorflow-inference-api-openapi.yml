@@ -241,23 +241,22 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ClassifyRequest:
+    RegressResponse:
       type: object
-      description: Request body for classification inference
+      description: Response from regression inference
       properties:
-        signature_name:
-          type: string
-          description: Optional name of the signature to use
-        context:
-          type: object
-          description: Context features shared across all examples
-          additionalProperties: true
-        examples:
+        result:
           type: array
-          description: List of input examples for classification
+          description: Regression result values, one per input example
           items:
-            type: object
-            additionalProperties: true
+            type: number
+    ErrorResponse:
+      type: object
+      description: Error response returned when a request fails
+      properties:
+        error:
+          type: string
+          description: Human-readable error message describing what went wrong
     PredictRequest:
       type: object
       description: Request body for prediction inference. Supports row format (instances) or column format (inputs).
@@ -299,22 +298,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    ErrorResponse:
-      type: object
-      description: Error response returned when a request fails
-      properties:
-        error:
-          type: string
-          description: Human-readable error message describing what went wrong
-    RegressResponse:
-      type: object
-      description: Response from regression inference
-      properties:
-        result:
-          type: array
-          description: Regression result values, one per input example
-          items:
-            type: number
     PredictResponse:
       type: object
       description: Response from prediction inference. Returns predictions in row format or outputs in column format depending on the request.
@@ -330,6 +313,23 @@ components:
           type: object
           description: Column format outputs - a map of output tensor names to value arrays
           additionalProperties: true
+    ClassifyRequest:
+      type: object
+      description: Request body for classification inference
+      properties:
+        signature_name:
+          type: string
+          description: Optional name of the signature to use
+        context:
+          type: object
+          description: Context features shared across all examples
+          additionalProperties: true
+        examples:
+          type: array
+          description: List of input examples for classification
+          items:
+            type: object
+            additionalProperties: true
     ClassifyResponse:
       type: object
       description: Response from classification inference
