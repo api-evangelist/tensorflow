@@ -241,22 +241,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    RegressResponse:
-      type: object
-      description: Response from regression inference
-      properties:
-        result:
-          type: array
-          description: Regression result values, one per input example
-          items:
-            type: number
-    ErrorResponse:
-      type: object
-      description: Error response returned when a request fails
-      properties:
-        error:
-          type: string
-          description: Human-readable error message describing what went wrong
     PredictRequest:
       type: object
       description: Request body for prediction inference. Supports row format (instances) or column format (inputs).
@@ -281,6 +265,15 @@ components:
           type: object
           description: Column format input - a map of input tensor names to arrays of values for each input across all instances.
           additionalProperties: true
+    RegressResponse:
+      type: object
+      description: Response from regression inference
+      properties:
+        result:
+          type: array
+          description: Regression result values, one per input example
+          items:
+            type: number
     RegressRequest:
       type: object
       description: Request body for regression inference
@@ -298,6 +291,28 @@ components:
           items:
             type: object
             additionalProperties: true
+    ErrorResponse:
+      type: object
+      description: Error response returned when a request fails
+      properties:
+        error:
+          type: string
+          description: Human-readable error message describing what went wrong
+    ClassifyResponse:
+      type: object
+      description: Response from classification inference
+      properties:
+        result:
+          type: array
+          description: Classification results per example, each being a list of label-score pairs
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                - type: number
     PredictResponse:
       type: object
       description: Response from prediction inference. Returns predictions in row format or outputs in column format depending on the request.
@@ -330,21 +345,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    ClassifyResponse:
-      type: object
-      description: Response from classification inference
-      properties:
-        result:
-          type: array
-          description: Classification results per example, each being a list of label-score pairs
-          items:
-            type: array
-            items:
-              type: array
-              items:
-                oneOf:
-                - type: string
-                - type: number
 externalDocs:
   description: TensorFlow Serving REST API Documentation
   url: https://www.tensorflow.org/tfx/serving/api_rest
