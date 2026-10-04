@@ -1,0 +1,37 @@
+slug: tensorflow
+provider: TensorFlow
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Inference
+  spec_file: tensorflow-inference-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.8
+  evidence: TensorFlow ModelServer supports REST APIs for model status checks, metadata retrieval, classification,
+    regression, and prediction inference
+  reason: The operations serve trained ML models for classification, regression and prediction inference
+    in production, including versioned model endpoints. This is the serving/MLOps leg of AI/ML model lifecycle
+    management (BC-610.60); some ambiguity only because it is runtime inference rather than the full lifecycle.
+- tag: Models
+  spec_file: tensorflow-models-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.8
+  evidence: '"TensorFlow ModelServer supports REST APIs for model status checks, metadata retrieval, classification,
+    regression, and prediction inference"; operations "Get Model Status", "Get Model Version Metadata"'
+  reason: Operations expose status and metadata of deployed machine-learning models in a production serving
+    system, which is ML model lifecycle / MLOps work under Artificial Intelligence Management. Not a product-engineering
+    or tenant capability — the objects are ML models, not software releases.

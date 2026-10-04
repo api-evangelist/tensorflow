@@ -190,6 +190,9 @@ include:
 - name: TensorFlow Community
   url: https://www.tensorflow.org/community
 common:
+- type: CapabilityMap
+  url: capabilities/tensorflow-capability-edges.yml
+  name: TensorFlow Business Capability Map
 - type: Website
   url: https://tensorflow.org
 - type: AgenticAccess
