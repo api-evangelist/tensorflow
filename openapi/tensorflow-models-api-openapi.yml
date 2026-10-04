@@ -178,6 +178,30 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response returned when a request fails
+      properties:
+        error:
+          type: string
+          description: Human-readable error message describing what went wrong
+    ModelMetadataResponse:
+      type: object
+      description: Response containing metadata about a model
+      properties:
+        model_spec:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The model name
+            version:
+              type: integer
+              description: The model version
+        metadata:
+          type: object
+          description: Metadata map containing signature definitions
+          additionalProperties: true
     ModelStatusResponse:
       type: object
       description: Response containing the status of a model or model version
@@ -210,30 +234,6 @@ components:
                   error_message:
                     type: string
                     description: Error message if any
-    ErrorResponse:
-      type: object
-      description: Error response returned when a request fails
-      properties:
-        error:
-          type: string
-          description: Human-readable error message describing what went wrong
-    ModelMetadataResponse:
-      type: object
-      description: Response containing metadata about a model
-      properties:
-        model_spec:
-          type: object
-          properties:
-            name:
-              type: string
-              description: The model name
-            version:
-              type: integer
-              description: The model version
-        metadata:
-          type: object
-          description: Metadata map containing signature definitions
-          additionalProperties: true
 externalDocs:
   description: TensorFlow Serving REST API Documentation
   url: https://www.tensorflow.org/tfx/serving/api_rest
