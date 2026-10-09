@@ -7,14 +7,17 @@ front_door_ai:
   probed_at: '2026-09-17'
   host: tensorflow.org
   final_host: www.tensorflow.org
-  ownership: inherited
+  ownership: own
   owner: tensorflow
   shares_host_with: null
-  inherited_from: www.tensorflow.org
+  inherited_from: null
+  alias_of: www.tensorflow.org
   verdict: scored
-  score: null
+  score: 28
+  band: 6
+  band_label: dominant
   host_score: 28
-  density: null
+  density: 36.27
   words: 772
   tiers:
     agentic: 1
