@@ -256,9 +256,9 @@ components:
           type: object
           description: Column format outputs - a map of output tensor names to value arrays
           additionalProperties: true
-    RegressRequest:
+    ClassifyRequest:
       type: object
-      description: Request body for regression inference
+      description: Request body for classification inference
       properties:
         signature_name:
           type: string
@@ -269,7 +269,7 @@ components:
           additionalProperties: true
         examples:
           type: array
-          description: List of input examples for regression
+          description: List of input examples for classification
           items:
             type: object
             additionalProperties: true
@@ -297,6 +297,38 @@ components:
           type: object
           description: Column format input - a map of input tensor names to arrays of values for each input across all instances.
           additionalProperties: true
+    ClassifyResponse:
+      type: object
+      description: Response from classification inference
+      properties:
+        result:
+          type: array
+          description: Classification results per example, each being a list of label-score pairs
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                oneOf:
+                - type: string
+                - type: number
+    RegressRequest:
+      type: object
+      description: Request body for regression inference
+      properties:
+        signature_name:
+          type: string
+          description: Optional name of the signature to use
+        context:
+          type: object
+          description: Context features shared across all examples
+          additionalProperties: true
+        examples:
+          type: array
+          description: List of input examples for regression
+          items:
+            type: object
+            additionalProperties: true
     ErrorResponse:
       type: object
       description: Error response returned when a request fails
@@ -313,38 +345,6 @@ components:
           description: Regression result values, one per input example
           items:
             type: number
-    ClassifyResponse:
-      type: object
-      description: Response from classification inference
-      properties:
-        result:
-          type: array
-          description: Classification results per example, each being a list of label-score pairs
-          items:
-            type: array
-            items:
-              type: array
-              items:
-                oneOf:
-                - type: string
-                - type: number
-    ClassifyRequest:
-      type: object
-      description: Request body for classification inference
-      properties:
-        signature_name:
-          type: string
-          description: Optional name of the signature to use
-        context:
-          type: object
-          description: Context features shared across all examples
-          additionalProperties: true
-        examples:
-          type: array
-          description: List of input examples for classification
-          items:
-            type: object
-            additionalProperties: true
 externalDocs:
   description: TensorFlow Serving REST API Documentation
   url: https://www.tensorflow.org/tfx/serving/api_rest
