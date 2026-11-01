@@ -1,4 +1,4 @@
-# TensorFlow (tensorflow)
+# TensorFlow
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,174 +66,185 @@
 
 TensorFlow is an end-to-end open source machine learning platform developed by Google. It provides a comprehensive ecosystem of tools, libraries, and community resources for building and deploying ML-powered applications, including model training, serving, mobile/edge deployment, and a hub of pre-trained models. TensorFlow Serving exposes REST and gRPC APIs for production model inference.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Deep Learning · JavaScript · Machine Learning · Model Serving · Neural Networks · Open Source · Python
 
-## Scope
+## TensorFlow on APIs.io
 
-- **Type:** Index
+Everything profiled for TensorFlow is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/tensorflow/](https://apis.io/providers/tensorflow/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- AI
-- Deep Learning
-- JavaScript
-- Machine Learning
-- Model Serving
-- Neural Networks
-- Open Source
-- Python
+- [TensorFlow Core API](https://apis.io/apis/tensorflow/tensorflow-core/) — The foundational Python and C++ API for building and training machine learning models using TensorFlow.
+- [TensorFlow.js API](https://apis.io/apis/tensorflow/tensorflow-js/) — A JavaScript library for training and deploying ML models in the browser and on Node.js.
+- [TensorFlow Lite API](https://apis.io/apis/tensorflow/tensorflow-lite/) — Lightweight solution for ML inference on mobile and embedded devices, optimized for on-device model execution.
+- [TensorFlow Hub API](https://apis.io/apis/tensorflow/tensorflow-hub/) — A library and repository of reusable pre-trained machine learning modules, enabling transfer learning across text, image, video, and audio domains.
+- [TensorBoard API](https://apis.io/apis/tensorflow/tensorboard/) — TensorFlow's visualization toolkit for experiment tracking, model debugging, and performance profiling via an embedded web server with REST endpoints.
+- [TensorFlow Inference API](https://apis.io/apis/tensorflow/tensorflow-inference-api/) — Model inference operations including classify, regress, and predict
+- [TensorFlow Models API](https://apis.io/apis/tensorflow/tensorflow-models-api/) — Model status and metadata operations
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-01-15
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (7)
 
-### TensorFlow Serving REST API
+Multi-step workflows that chain operations into a business task.
 
-A flexible, high-performance serving system for machine learning models designed for production environments. Provides REST endpoints for model status, metadata, classification, regression, and prediction inference.
+- [TensorFlow Serving Preflight and Classify](https://apis.io/arazzos/tensorflow/tensorflow-classify-preflight-workflow/)
+- [TensorFlow Serving Route Inference by Version Label](https://apis.io/arazzos/tensorflow/tensorflow-label-routed-inference-workflow/)
+- [TensorFlow Serving Pinned Reproducible Example Scoring](https://apis.io/arazzos/tensorflow/tensorflow-pinned-example-scoring-workflow/)
+- [TensorFlow Serving Preflight and Predict](https://apis.io/arazzos/tensorflow/tensorflow-predict-preflight-workflow/)
+- [TensorFlow Serving Preflight and Regress](https://apis.io/arazzos/tensorflow/tensorflow-regress-preflight-workflow/)
+- [TensorFlow Serving Gate a Rollout on Version Readiness](https://apis.io/arazzos/tensorflow/tensorflow-rollout-readiness-workflow/)
+- [TensorFlow Serving Compare a Candidate Version Against the Default](https://apis.io/arazzos/tensorflow/tensorflow-version-canary-compare-workflow/)
 
-- **Human URL:** [https://www.tensorflow.org/tfx/serving/api_rest](https://www.tensorflow.org/tfx/serving/api_rest)
-- **Base URL:** `http://host:8501`
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- Inference
-- Model Serving
-- Production
-- REST API
+- [tensorflow-serving](https://apis.io/servers/tensorflow/tensorflow-serving/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://www.tensorflow.org/tfx/serving/api_rest)
-- [Git Hub](https://github.com/tensorflow/serving)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/openapi/tensorflow-serving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/tensorflow-serving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tensorflow-serving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### TensorFlow Core API
+- [Tensorflow Agentic Access](https://apis.io/agentic-access/tensorflow/tensorflow-agentic-access/)
 
-The foundational Python and C++ API for building and training machine learning models using TensorFlow.
+#### JSON Schema (3)
 
-- **Human URL:** [https://www.tensorflow.org/api_docs/python/tf](https://www.tensorflow.org/api_docs/python/tf)
-- **Base URL:** `https://www.tensorflow.org/api_docs`
+The data models the API reads and writes.
 
-#### Tags
+- [TensorFlow Serving Model Status Response](https://apis.io/schemas/tensorflow/tensorflow-serving-model-status/)
+- [TensorFlow Serving Prediction Request](https://apis.io/schemas/tensorflow/tensorflow-serving-prediction-request/)
+- [TensorFlow Serving Prediction Response](https://apis.io/schemas/tensorflow/tensorflow-serving-prediction-response/)
 
-- Core API
-- Machine Learning
-- Python
+#### JSON Structure (1)
 
-#### Properties
+Data models expressed in JSON Structure.
 
-- [Documentation](https://www.tensorflow.org/api_docs/python/tf)
-- [Tutorial](https://www.tensorflow.org/tutorials)
-- [Git Hub](https://github.com/tensorflow/tensorflow)
-- [Guide](https://www.tensorflow.org/guide)
-- [Postman Collection](collections/tensorflow-serving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tensorflow-serving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Tensorflow Serving Prediction Request Structure](https://apis.io/json-structure/tensorflow/tensorflow-serving-prediction-request-structure/)
 
-### TensorFlow.js API
+#### JSON-LD (1)
 
-A JavaScript library for training and deploying ML models in the browser and on Node.js.
+Linked-data contexts for the provider's vocabulary.
 
-- **Human URL:** [https://js.tensorflow.org/](https://js.tensorflow.org/)
-- **Base URL:** `https://cdn.jsdelivr.net/npm/@tensorflow/tfjs`
+- [Tensorflow Context](https://apis.io/jsonld/tensorflow/tensorflow-context/)
 
-#### Tags
+#### Vocabulary (1)
 
-- Browser
-- JavaScript
-- Node.js
+The provider's domain terms, defined.
 
-#### Properties
+- [TensorFlow Vocabulary](https://apis.io/vocabularies/tensorflow/tensorflow-vocabulary/)
 
-- [Documentation](https://js.tensorflow.org/api/latest/)
-- [Tutorial](https://js.tensorflow.org/tutorials/)
-- [Git Hub](https://github.com/tensorflow/tfjs)
-- [N P M](https://www.npmjs.com/package/@tensorflow/tfjs)
-- [Postman Collection](collections/tensorflow-serving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tensorflow-serving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Examples (2)
 
-### TensorFlow Lite API
+Example requests and responses.
 
-Lightweight solution for ML inference on mobile and embedded devices, optimized for on-device model execution.
+- [Tensorflow Serving Model Status Example](https://apis.io/examples/tensorflow/tensorflow-serving-model-status-example/)
+- [Tensorflow Serving Predict Example](https://apis.io/examples/tensorflow/tensorflow-serving-predict-example/)
 
-- **Human URL:** [https://www.tensorflow.org/lite](https://www.tensorflow.org/lite)
-- **Base URL:** `https://www.tensorflow.org/lite/api_docs`
+#### Collections (3)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Edge Computing
-- Embedded
-- Mobile
-- On-Device AI
+- [TensorFlow Serving REST Inference API](https://apis.io/collections/tensorflow/open-tensorflow-inference-api/)
+- [TensorFlow Serving REST Inference Models API](https://apis.io/collections/tensorflow/open-tensorflow-models-api/)
+- [TensorFlow Serving REST API](https://apis.io/collections/tensorflow/open-tensorflow-serving/)
 
-#### Properties
+#### Overlays (1)
 
-- [Documentation](https://www.tensorflow.org/lite/api_docs)
-- [Guide](https://www.tensorflow.org/lite/guide)
-- [Examples](https://www.tensorflow.org/lite/examples)
-- [Git Hub](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite)
-- [Postman Collection](collections/tensorflow-serving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tensorflow-serving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+OpenAPI overlays, including conversational phrasing for each operation.
 
-### TensorFlow Hub API
+- [Tensorflow Serving Overlay](https://apis.io/overlays/tensorflow/tensorflow-serving-overlay/)
 
-A library and repository of reusable pre-trained machine learning modules, enabling transfer learning across text, image, video, and audio domains.
+#### Governance rules (2)
 
-- **Human URL:** [https://tfhub.dev/](https://tfhub.dev/)
-- **Base URL:** `https://tfhub.dev/`
+Spectral rulesets for the provider's contracts.
 
-#### Tags
+- [TensorFlow — jsonschema rules](https://apis.io/rules/tensorflow/tensorflow-jsonschema-spectral-rules/)
+- [TensorFlow — serving rules](https://apis.io/rules/tensorflow/tensorflow-serving-rules/)
 
-- Model Repository
-- Pre-Trained Models
-- Transfer Learning
+#### Security (2)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://www.tensorflow.org/hub/api_docs/python/hub)
-- [Models](https://tfhub.dev/)
-- [Git Hub](https://github.com/tensorflow/hub)
-- [Postman Collection](collections/tensorflow-serving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tensorflow-serving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Tensorflow Authentication](https://apis.io/security/tensorflow/tensorflow-authentication/)
+- [Tensorflow Domain Security](https://apis.io/security/tensorflow/tensorflow-domain-security/)
 
-### TensorBoard API
+#### Plans and pricing (1)
 
-TensorFlow's visualization toolkit for experiment tracking, model debugging, and performance profiling via an embedded web server with REST endpoints.
+Published plans, tiers and prices.
 
-- **Human URL:** [https://www.tensorflow.org/tensorboard](https://www.tensorflow.org/tensorboard)
+- [Tensorflow Plans Pricing](https://apis.io/plans/tensorflow/tensorflow-plans-pricing/)
 
-#### Tags
+#### Rate limits (1)
 
-- Model Debugging
-- Monitoring
-- Visualization
+Published request limits.
 
-#### Properties
+- [Tensorflow Rate Limits](https://apis.io/rate-limits/tensorflow/tensorflow-rate-limits/)
 
-- [Documentation](https://www.tensorflow.org/tensorboard/get_started)
-- [Git Hub](https://github.com/tensorflow/tensorboard)
-- [Postman Collection](collections/tensorflow-serving.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tensorflow-serving.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### FinOps (1)
 
-## Common Properties
+What the API costs to run, by operation.
 
-- [LinkedIn](https://www.linkedin.com/showcase/tensorflowdev)
+- [Tensorflow Finops](https://apis.io/finops/tensorflow/tensorflow-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://tensorflow.org)
 - [Blog](https://blog.tensorflow.org/)
-- [Git Hub  Org](https://github.com/tensorflow)
-- [Twitter](https://twitter.com/tensorflow)
-- [YouTube](https://www.youtube.com/tensorflow)
-- [License](https://github.com/tensorflow/tensorflow/blob/master/LICENSE)
-- [Forum](https://discuss.tensorflow.org/)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/tensorflow)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/openapi/tensorflow-serving-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Vocabulary](https://raw.githubusercontent.com/api-evangelist/tensorflow/refs/heads/main/vocabulary/tensorflow-vocabulary.yml)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Google Brain Team
-**Email:** tensorflow@googlegroups.com
-**URL:** https://www.tensorflow.org/
+**Kin Score 35.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 52.6 |
+| Contract governance | 31.8 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 42.9 |
+| Access clarity | 5.3 |
+
+**Agent readiness 24.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/tensorflow/](https://apis.io/providers/tensorflow/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for TensorFlow: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/tensorflow/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
